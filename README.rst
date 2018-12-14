@@ -21,9 +21,9 @@ The Motivition
 |
 | Here come’s the solution!
 |
-| With this Ultimate Decision Maker, you only need to take a photo of 
-| anything you can't decide. The algorithm will automatically detect words,
-| objects, and choices, and |ss| randomly select one |se| find your destiny!!!
+| With this Ultimate Decision Maker, you only need to take a photo of anything you can't 
+| decide. The algorithm will automatically detect words, objects, 
+| and choices, and |ss| randomly select one |se| find your destiny!!!
 | 
 |
 | Next time you pondering which direction to go, just let Ultimate Decision Maker
