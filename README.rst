@@ -2,7 +2,6 @@
 Ultimate Decision Maker
 =========
 .. role:: strike
-    :class: strike
 
 .. image:: https://travis-ci.org/Pylons/pyramid.png?branch=master
         :target: https://travis-ci.org/Pylons/pyramid
