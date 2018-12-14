@@ -43,3 +43,5 @@ Work Flow
 =========
 TBD.
 
+.. role:: strike
+    :class: strike
