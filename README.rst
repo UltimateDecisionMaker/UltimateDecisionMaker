@@ -1,7 +1,14 @@
 =========
 Ultimate Decision Maker
 =========
-.. role:: strike
+
+.. |ss| raw:: html
+
+   <strike>
+
+.. |se| raw:: html
+
+   </strike>
 
 .. image:: https://travis-ci.org/Pylons/pyramid.png?branch=master
         :target: https://travis-ci.org/Pylons/pyramid
@@ -14,7 +21,7 @@ The Motivition
 | Here come’s the solution!
 | With this Ultimate Decision Maker, you only need to take a photo of 
 | anything you can't decide. The algorithm will automatically detect words,
-| objects, and choices, and :strike:`randomly select one` find your destiny for you!!!
+| objects, and choices, and |ss| randomly select one |se| find your destiny for you!!!
 | 
 | Next time you pondering which direction to go, just let Ultimate Decision Maker
 | to help you find your destiny!
