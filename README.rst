@@ -9,8 +9,8 @@ Ultimate Decision Making
 The Motivition
 ==============
 
-How often do you look at a menu and still can’t decide what you will eat?
-Here come’s the solution!
+| How often do you look at a menu and still can’t decide what you will eat?
+| Here come’s the solution!
 
 Design Flow:
 Take a photo of the menu:
