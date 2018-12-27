@@ -1,0 +1,61 @@
+header {
+  border-bottom: 0.05vh solid slategray;
+  box-shadow: 0 4px 2px -2px slategray;
+  background-color: #4CAF50;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+    /* display: block; */
+  }
+
+.active {
+background-color: #4CAF50;
+}
+
+.main_nav a {
+    display: inline-block;
+    padding: 8px;
+    color: aliceblue;
+}
+
+.main_nav li {
+
+    display: inline-block;
+    padding: 24px;
+
+}
+
+.main_nav li:after {
+    content: ' |';
+}
+
+.main_nav ul {
+    background-color: #111;
+}
+.main_nav ul:before {
+    content: url('../assets/dino.png');
+}
+
+.company_labels {
+  font-weight: bold;
+}
+
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgb(15, 8, 8);
+    margin: 1em 0;
+    padding: 0;
+}
