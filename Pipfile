@@ -4,6 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pylint = "*"
+flake8 = "*"
+pydocstyle = "*"
+pep8 = "*"
 
 [packages]
 alembic = "==1.0.5"
