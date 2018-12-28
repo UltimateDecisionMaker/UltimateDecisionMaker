@@ -31,3 +31,11 @@ def test_home_input(app):
 
     assert b"Here's what you shall go along with!" in rv.data
     assert (b'burger' in rv.data) or (b'pizza' in rv.data)
+
+def test_register1():
+    rv = app.test_client().post('/register', data={'email':'aaa','password':'bbb'},follow_redirects=True)
+    assert b"Login to view your history choices, see activities from friends, and more crazy features!" in rv.data
+
+def test_login1():
+    rv = app.test_client().post('/login', data={'email':'aaa','password':'bbb'},follow_redirects=True)
+    assert b"Now, tell us your choices" in rv.data
