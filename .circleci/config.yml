@@ -52,9 +52,6 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            pytest -v
-          command: |
-            . venv/bin/activate
             echo "help me"
 
       - store_artifacts:
