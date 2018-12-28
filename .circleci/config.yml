@@ -25,9 +25,9 @@ jobs:
       - run: echo 'test'
 
       - run:
-      name: create database
-      command: |
-        psql --host localhost -U postgresql -d test_ultimate_decision_maker
+          name: create database
+          command: |
+            psql --host localhost -U postgresql -d test_ultimate_decision_maker
 
       # Download and cache dependencies
       - restore_cache:
