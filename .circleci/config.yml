@@ -55,7 +55,7 @@ jobs:
             pytest -v
           command: |
             . venv/bin/activate
-            ls -al
+            echo "help me"
 
       - store_artifacts:
           path: test-reports
