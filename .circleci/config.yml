@@ -48,7 +48,7 @@ jobs:
           command: |
             . venv/bin/activate
             pip install postgres
-            -host localhost -U postgresql -d test_ultimate_decision_maker
+            psql --host localhost -U postgresql -d test_ultimate_decision_maker
 
       - run:
           name: run tests
