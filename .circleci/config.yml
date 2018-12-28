@@ -13,10 +13,10 @@ jobs:
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/postgres:10.5
-        environment:
-            POSTGRES_USER: postgresql
-            POSTGRES_DB: TEST_DATABASE_URL
+    #   - image: circleci/postgres:10.5
+        # environment:
+        #     POSTGRES_USER: postgresql
+        #     POSTGRES_DB: TEST_DATABASE_URL
 
     working_directory: ~/repo
 
