@@ -7,6 +7,7 @@ from datetime import datetime as dt
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+
 class Account(db.Model):
     __tablename__ = 'accounts'
 
@@ -14,14 +15,14 @@ class Account(db.Model):
     email = db.Column(db.String(256), index=True, nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)
 
-    date_created = db.Column(db.DateTime, default = dt.now())
+    date_created = db.Column(db.DateTime, default=dt.now())
 
     def __repr__(self):
         return '<Account {}>'.format(self.email)
 
     def __init__(self, email, password):
         self.email = email
-        self.password = password
+        self.password = sha256_crypt.hash(password)
 
     @classmethod
     def check_password_hash(cls, account, password):
