@@ -48,7 +48,7 @@ jobs:
           command: |
             . venv/bin/activate
             sudo apt-get install postgresql
-            psql
+            systemctl service status psql
 
       - run:
           name: run tests
