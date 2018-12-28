@@ -47,7 +47,7 @@ jobs:
           name: create database
           command: |
             . venv/bin/activate
-            pip install postgres
+            sudo apt-get install postgres
             psql -h localhost -p 5432 -U postgresql -d test_ultimate_decision_maker
 
       - run:
