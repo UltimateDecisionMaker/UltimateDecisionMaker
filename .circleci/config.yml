@@ -47,7 +47,8 @@ jobs:
       # https://nose.readthedocs.io
       - run:
           name: run tests
-          command: ls -al
+          command: |
+            ls -al
           command: |
             . venv/bin/activate
             pytest -v
