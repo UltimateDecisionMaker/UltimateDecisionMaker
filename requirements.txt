@@ -37,3 +37,4 @@ tornado==5.1.1
 urllib3==1.24.1
 Werkzeug==0.14.1
 WTForms==2.2.1
+awscli>=1.15.50
