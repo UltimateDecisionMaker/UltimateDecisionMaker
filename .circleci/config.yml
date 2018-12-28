@@ -46,9 +46,9 @@ jobs:
           name: create database
           command: |
             . venv/bin/activate
-            # sudo apt-get install postgresql
-            # sudo service postgresql start
-            # psql -c "create database test_ultimate_decision_maker;"
+            sudo apt install -y postgresql-client
+            createdb -h localhost db_test -O postgresql
+            createdb -h localhost db_special -O postgresql
 
       - run:
           name: run tests
