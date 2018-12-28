@@ -48,7 +48,7 @@ jobs:
           name: create database
           command: |
             sudo apt install -y postgresql-client
-            createdb -h localhost db_test -O postgresql
+            createdb -h localhost db_test -O circleci
 
       - run:
           name: run tests
