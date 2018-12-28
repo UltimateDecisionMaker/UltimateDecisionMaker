@@ -5,15 +5,6 @@ body {
     font-family: "Work Sans"
 }
 
-/* header {
-  border-bottom: 0.05vh solid slategray;
-  box-shadow: 0 4px 2px -2px slategray;
-} */
-
-select {
-  display: block;
-}
-
 .main_nav {
     text-align: center;
 }
@@ -28,20 +19,12 @@ select {
 
 .main_nav li {
     display: inline-block;
-    margin: 1rem
+    margin: 1rem 0rem;
 }
 
 .main_nav a:hover {
     color: lightgray;
     cursor: pointer;
-}
-
-/* .main_nav li:after {
-    content: ' |';
-} */
-
-.company_labels {
-  font-weight: bold;
 }
 
 .title {
@@ -50,7 +33,7 @@ select {
     color: white;
     padding: 0px 10px;
     margin: 0 auto;
-    width: 80%;
+    /* width: 80%; */
     text-align: center;
 }
 
@@ -62,6 +45,7 @@ ul {
 }
 
 .sexy_line{
+    /* Borrowed from CSS Tricks forums. Name left alone for posterity.*/
     display:block;
     border:none;
     color:white;
@@ -69,3 +53,4 @@ ul {
     background:black;
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#fff));
 }
+

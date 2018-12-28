@@ -5,7 +5,7 @@
     <p class=error><strong>Error:</strong> {{ error }}
   {% endif %}
   <div class='register'>
-    <h3>Register to view your history choices, see activities from friends, and more crazy features!</h3>
+    <h3>Register to keep track of and view your choices historically.</h3>
     <form action="/register" method="POST">
       {{ form.csrf_token }}
       {{ form.email.label }} {{form.email }}
