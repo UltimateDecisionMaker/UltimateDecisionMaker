@@ -1,9 +1,7 @@
 try:
-    from . import app
+    from src import app
 except:
     from .src import app
-else:
-    from src import app
 
 
 if __name__ == '__main__':
