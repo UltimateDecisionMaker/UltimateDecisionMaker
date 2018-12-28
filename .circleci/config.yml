@@ -49,7 +49,7 @@ jobs:
             . venv/bin/activate
             sudo apt-get install postgresql
             sudo service postgresql start
-            sudo psql -c "create database test_ultimate_decision_maker;"
+            psql -c "create database test_ultimate_decision_maker;"
 
       - run:
           name: run tests
