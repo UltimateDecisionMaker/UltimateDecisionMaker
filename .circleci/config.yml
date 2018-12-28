@@ -20,7 +20,7 @@ jobs:
     #   - image: circleci/postgres:10.5
     #     environment:
     #         POSTGRES_USER: postgresql
-    #         POSTGRES_DB: TEST_DATABASE_URL
+            POSTGRES_DB: TEST_DATABASE_URL
 
     working_directory: ~/repo
 
