@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class='login'>
+    <h3>Login to view your history choices, see activities from friends, and more crazy features!</h3>
+    <form action="/login" method="POST">
+      {{ form.csrf_token }}
+      {{ form.email.label }} {{form.email }}
+      {{ form.password.label }} {{form.password}}
+      <input type="submit" value="Login">
+    </form>
+  </div>
+{% endblock content %}

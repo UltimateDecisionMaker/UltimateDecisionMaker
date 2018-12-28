@@ -11,11 +11,19 @@
 
 <div class="container input">
   <h3>Now, tell us your choices</h3>
-  <form action="{{url_for('handle_choice')}}" method="post">
-    <input type="text" name="projectFilePath">
-    <input type="text" name="projectFilePath">
-    <input type="submit">
+  <form action="{{url_for('home')}}" method="POST">
+    <input type="text" name="choice1" />
+    <input type="text" name="choice2" />
+    {{ form.csrf_token }}
+    <input type="submit" value="Decide for Me">
   </form>
 </div>
+
+{% if decision %}
+<div class="decision">
+  <h3> Here's what you shall go along with! </h3>
+  <p> {{ decision }} </p>
+</div>
+{% endif %}
 
 {% endblock content%}

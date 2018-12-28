@@ -8,37 +8,26 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}">
-  <title>Ultimate Decision Maker</title>
+  <title>Ultimate Decision Maker - {% block title %}{% endblock title %}</title>
+  {% include "head.html" %}
 </head>
 
 <body>
   <header>
-    <h1 class="title">The Ultimate Decision Maker</h1>
-    <nav class="main_nav">
-      <ul>
-      {% block nav_bar %}
-        <li>
-        <a>Home</a></li><li>
-        <a>Register</a></li><li>
-        <a>Login</a></li>
-      {% endblock nav_bar %}
-      </ul>
-    </nav>
-    <div><span class="sexy_line"></span></div>
-
-
-
+    <div class="container">
+      <h1 class="title">Ultimate Decision Maker{% block h1 %} {% endblock h1 %}</h1>
+      {% include "nav.html" %}
+    </div>
+    <h3>Welcome to the Ultimate Decision Maker. Find you daily destiny here! </h3>
   </header>
-  <main>
-
-  {% block content %}
-    <h2>No Content</h2>
-  {% endblock content%}
+  <main class="container">
+    {% block content %}
+      <h2>No Content</h2>
+    {% endblock content%}
   </main>
 
   <footer></footer>
   {% block scripts %}
-
   {% endblock scripts %}
 </body>
 </html>
