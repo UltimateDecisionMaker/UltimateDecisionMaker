@@ -52,7 +52,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            echo "help me"
+            ls -al
 
       - store_artifacts:
           path: test-reports
