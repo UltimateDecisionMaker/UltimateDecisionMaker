@@ -18,8 +18,11 @@ jobs:
     working_directory: ~/repo
 
     steps:
+    # Checkout the code from the branch into the working directory
       - checkout
-      - run: echo 'test'
+      - run:
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
 
       # Download and cache dependencies
       - restore_cache:
@@ -48,10 +51,9 @@ jobs:
       - run:
           name: run tests
           command: |
-            ls -al
-          command: |
             . venv/bin/activate
             pytest -v
+            ls -al
 
       - store_artifacts:
           path: test-reports
