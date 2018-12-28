@@ -19,6 +19,7 @@ jobs:
 
     steps:
       - checkout
+      - run: echo 'test'
 
       # Download and cache dependencies
       - restore_cache:
@@ -48,7 +49,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            python manage.py test
+            pytest -v
 
       - store_artifacts:
           path: test-reports

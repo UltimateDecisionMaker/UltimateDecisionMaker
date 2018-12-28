@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -9,10 +10,16 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}">
   <title>Ultimate Decision Maker</title>
+=======
+  <title>Ultimate Decision Maker - {% block title %}{% endblock title %}</title>
+  {% include "head.html" %}
+
+>>>>>>> f4dd79b2e16b36db76e430eca22b4adfbec27afb
 </head>
 
 <body>
   <header>
+<<<<<<< HEAD
     <h1 class="title">The Ultimate Decision Maker</h1>
     <nav class="main_nav">
       <ul>
@@ -28,17 +35,22 @@
 
 
 
+=======
+    <div class="container">
+      <h1>Ultimate Decision Maker - {% block h1 %} {% endblock h1 %}</h1>
+      {% include "nav.html" %}
+    </div>
+    <h3>Welcome to the Ultimate Decision Maker. Find you daily destiny here! </h3>
+>>>>>>> f4dd79b2e16b36db76e430eca22b4adfbec27afb
   </header>
-  <main>
-
-  {% block content %}
-    <h2>No Content</h2>
-  {% endblock content%}
+  <main class="container">
+    {% block content %}
+      <h2>No Content</h2>
+    {% endblock content%}
   </main>
 
   <footer></footer>
   {% block scripts %}
-
   {% endblock scripts %}
 </body>
 </html>
