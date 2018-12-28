@@ -46,6 +46,7 @@ jobs:
       - run:
           name: create database
           command: |
+            . venv/bin/activate
             psql --host localhost -U postgresql -d test_ultimate_decision_maker
 
       - run:
