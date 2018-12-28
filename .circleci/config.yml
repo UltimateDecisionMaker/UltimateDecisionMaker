@@ -24,11 +24,6 @@ jobs:
       - checkout
       - run: echo 'test'
 
-      - run:
-          name: create database
-          command: |
-            psql --host localhost -U postgresql -d test_ultimate_decision_maker
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -48,11 +43,11 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-      # run tests!
-      # this example uses Django's built-in test-runner
-      # other common Python testing frameworks include pytest and nose
-      # https://pytest.org
-      # https://nose.readthedocs.io
+      - run:
+          name: create database
+          command: |
+            psql --host localhost -U postgresql -d test_ultimate_decision_maker
+
       - run:
           name: run tests
           command: |
