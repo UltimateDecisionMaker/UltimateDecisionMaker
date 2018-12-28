@@ -10,6 +10,8 @@ jobs:
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.6.7
         environment:
+            PGHOST: 127.0.0.1
+            PGUSER: root
 
 
       # Specify service dependencies here if necessary
@@ -48,7 +50,7 @@ jobs:
           name: create database
           command: |
             sudo apt install -y postgresql-client
-            createdb -h localhost db_test -O postgresql
+            createdb -h localhost test_ultimate_decision_maker -O postgresql
 
       - run:
           name: run tests
