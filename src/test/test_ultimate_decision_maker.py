@@ -1,3 +1,8 @@
+"""
+In this file, we test the app we built. The basic guideline is to have at least 3 tests
+for each funtion we have. One for normal case; one for edge case; and one for failed case.
+"""
+
 import pytest
 from .. import app
 from flask import request
