@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+  {% if error %}
+    <p class=error><strong>Error:</strong> {{ error }}
+  {% endif %}
   <div class='login'>
     <h3>Login here:</h3>
     <form action="/login" method="POST">

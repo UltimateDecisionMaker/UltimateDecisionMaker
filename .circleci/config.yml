@@ -9,20 +9,24 @@ jobs:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.6.7
+        environment:
+            PGHOST: 127.0.0.1
+            PGUSER: postgresql
+
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+    #   - image: circleci/postgres:10.5
+    #     environment:
+    #         POSTGRES_USER: postgresql
+    #         POSTGRES_DB: TEST_DATABASE_URL
 
     working_directory: ~/repo
 
     steps:
     # Checkout the code from the branch into the working directory
       - checkout
-      - run:
-          name: Show current branch
-          command: echo ${CIRCLE_BRANCH}
 
       # Download and cache dependencies
       - restore_cache:
@@ -43,11 +47,12 @@ jobs:
             - ./venv
           key: v1-dependencies-{{ checksum "requirements.txt" }}
 
-      # run tests!
-      # this example uses Django's built-in test-runner
-      # other common Python testing frameworks include pytest and nose
-      # https://pytest.org
-      # https://nose.readthedocs.io
+      - run:
+          name: create database
+          command: |
+            sudo apt install -y postgresql-client
+            createdb -h localhost test_ultimate_decision_maker -O postgresql
+
       - run:
           name: run tests
           command: |

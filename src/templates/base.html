@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Ultimate Decision Maker - {% block title %}{% endblock title %}</title>
   {% include "head.html" %}
+  <title>Ultimate Decision Maker - {% block title %}{% endblock title %}</title>
 </head>
 
 <body>
@@ -11,6 +11,17 @@
       <h1 class="title">Ultimate Decision Maker{% block h1 %} {% endblock h1 %}</h1>
       {% include "nav.html" %}
   </header>
+
+  {% with messages=get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for m in messages %}
+        <li>{{ m }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  {% endwith %}
+
   <main class="container">
     {% block content %}
       <h2>No Content</h2>
