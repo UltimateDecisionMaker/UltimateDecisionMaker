@@ -48,8 +48,8 @@ jobs:
           command: |
             . venv/bin/activate
             sudo apt-get install postgresql
-            sudo /etc/init.d/postgresql restart
-            psql -d test_ultimate_decision_maker
+            sudo service postgresql start
+            # psql -d test_ultimate_decision_maker
 
       - run:
           name: run tests
