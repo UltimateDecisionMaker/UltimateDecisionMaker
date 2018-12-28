@@ -10,10 +10,10 @@ def app(request):
     """
     _app.config.from_mapping(
         TESTING=True,
-        SECRET_KEY=os.environ.get('SECRET_KEY'),
+        WTF_CSRF_ENABLED=False,
+        # SECRET_KEY=os.environ.get('SECRET_KEY'),
         # SQLALCHEMY_DATABASE_URI=os.getenv('TEST_DATABASE_URL'),
         # SQLALCHEMY_TRACK_MODIFICATIONS=False,
-        WTF_CSRF_ENABLED=False,
     )
 
     ctx = _app.app_context()
