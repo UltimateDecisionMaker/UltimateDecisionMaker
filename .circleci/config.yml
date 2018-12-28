@@ -47,7 +47,6 @@ jobs:
           command: |
             sudo apt install -y postgresql-client
             createdb -h localhost db_test -O postgresql
-            createdb -h localhost db_special -O postgresql
 
       - run:
           name: run tests
