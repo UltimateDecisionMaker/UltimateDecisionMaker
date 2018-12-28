@@ -2,15 +2,14 @@
 
 {% block content %}
 <div>
-  <h2>Welcome to Ultimate Decision Maker.</h2>
-  <p>This is a place where you can tell us what your choices are,</p>
-  <p>And we will find the best one for you.</p>
-  <p>...</p>
-  <p>No more pondering, Life can be this easy!</p>
+  <h2>Let's make some decisions!</h2>
+  <p>Not sure what to order for dinner? Trying to choose between similar brands?
+  Use our decision-making engine to decide for you! Simply input your choices below
+  and hit the button, and we'll do the hard work for you.</p>
 </div>
 
-<div class="container input">
-  <h3>Now, tell us your choices</h3>
+<div class="input">
+  <h3>What are you trying to decide between?</h3>
   <form action="{{url_for('home')}}" method="POST">
     <input type="text" name="choice1" />
     <input type="text" name="choice2" />
@@ -21,8 +20,8 @@
 
 {% if decision %}
 <div class="decision">
-  <h3> Here's what you shall go along with! </h3>
-  <p> {{ decision }} </p>
+  <h3>DECISION MADE:</h3>
+  <p> {{ decision }} it is! </p>
 </div>
 {% endif %}
 
