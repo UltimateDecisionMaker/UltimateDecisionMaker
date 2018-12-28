@@ -1,6 +1,7 @@
 from . import app
 from .forms import ChoiceForm, AuthForm
 from flask import render_template, session, flash, redirect, url_for
+from .models import db, Account
 
 
 @app.route('/register', methods=['POST','GET'])
@@ -15,6 +16,7 @@ def register():
         if not email or not password:
             error = 'Invalid email or password'
 
+        # if Account.query.filter_by(email=email).first
         # flash(error)
         if error is None:
             # flash("Registration complete")
