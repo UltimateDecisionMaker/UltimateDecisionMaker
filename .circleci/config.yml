@@ -48,7 +48,7 @@ jobs:
           command: |
             . venv/bin/activate
             sudo apt-get install postgresql
-            psql -h localhost -p 5432 -U postgresql -d test_ultimate_decision_maker
+            psql -d test_ultimate_decision_maker
 
       - run:
           name: run tests
