@@ -22,7 +22,6 @@ jobs:
 
     steps:
       - checkout
-      - run: echo 'test'
 
       # Download and cache dependencies
       - restore_cache:
@@ -47,9 +46,9 @@ jobs:
           name: create database
           command: |
             . venv/bin/activate
-            sudo apt-get install postgresql
-            sudo service postgresql start
-            psql -c "create database test_ultimate_decision_maker;"
+            # sudo apt-get install postgresql
+            # sudo service postgresql start
+            # psql -c "create database test_ultimate_decision_maker;"
 
       - run:
           name: run tests
