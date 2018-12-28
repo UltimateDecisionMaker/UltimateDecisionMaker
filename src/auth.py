@@ -29,7 +29,6 @@ def register():
             flash("Registration complete. Please Log in")
             return redirect(url_for('.login'))
 
-        # flash(error)
     return render_template('auth/register.html', form=form, error=error)
 
 
@@ -41,7 +40,6 @@ def login():
     if form.validate_on_submit():
         email = form.data['email']
         password = form.data['password']
-        # error = None
 
         account = Account.query.filter_by(email=email).first()
 
@@ -53,7 +51,6 @@ def login():
 
             flash("You were successfully logged in")
             return redirect(url_for(".home"))
-    # error = "something wrong, can't proceed."
     return render_template('auth/login.html', form=form, error=error)
 
 
