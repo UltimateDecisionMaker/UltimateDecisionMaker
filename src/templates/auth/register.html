@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class='register'>
+    <h3>Register to keep track of and view your choices historically.</h3>
+    <form action="/register" method="POST">
+      {{ form.csrf_token }}
+      {{ form.email.label }} {{form.email }}
+      {{ form.password.label }} {{form.password}}
+      <input type="submit" value="Register">
+    </form>
+  </div>
+{% endblock content %}

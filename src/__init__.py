@@ -10,4 +10,10 @@ app = Flask(
     instance_relative_config=True
 )
 
-from . import routes, exceptions
+app.config.from_mapping(
+    SECRET_KEY=os.getenv('SECRET_KEY'),
+    # SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URL'),
+    # SQLALCHEMY_TRACK_MODIFICATIONS=False
+)
+
+from . import auth, routes, forms, exceptions

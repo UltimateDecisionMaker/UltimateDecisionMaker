@@ -1,28 +1,56 @@
-header {
-  border-bottom: 0.05vh solid slategray;
-  box-shadow: 0 4px 2px -2px slategray;
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin|Work+Sans');
+
+body {
+    padding: 20px;
+    font-family: "Work Sans"
 }
 
-select {
-  display: block;
+.main_nav {
+    text-align: center;
 }
 
 .main_nav a {
     text-decoration: none;
+    color: white;
+    font-size: 20px;
+    margin: 0px 10px;
+
 }
 
 .main_nav li {
     display: inline-block;
+    margin: 1rem 0rem;
 }
 
-.main_nav li:after {
-    content: ' |';
+.main_nav a:hover {
+    color: lightgray;
+    cursor: pointer;
 }
 
-.main_nav ul:before {
-    content: url('../assets/dino.png');
+.title {
+    font-family: "Libre Franklin";
+    background-image: linear-gradient(to right, black , gray);
+    color: white;
+    padding: 0px 10px;
+    margin: 0 auto;
+    /* width: 80%; */
+    text-align: center;
 }
 
-.company_labels {
-  font-weight: bold;
+ul {
+    background-image: linear-gradient(to right, black , gray);
+    display: inline;
+    padding: 5px 0px;
+    text-align: center;
 }
+
+.sexy_line{
+    /* Borrowed from CSS Tricks forums. Name left alone for posterity.*/
+    display:block;
+    border:none;
+    color:white;
+    height:1px;
+    background:black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#fff));
+}
+
