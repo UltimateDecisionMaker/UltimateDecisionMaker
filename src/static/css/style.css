@@ -28,7 +28,7 @@ select {
 
 .main_nav li {
     display: inline-block;
-    margin: 1rem
+    margin: 1rem 0rem;
 }
 
 .main_nav a:hover {
@@ -50,7 +50,7 @@ select {
     color: white;
     padding: 0px 10px;
     margin: 0 auto;
-    width: 80%;
+    /* width: 80%; */
     text-align: center;
 }
 
