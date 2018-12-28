@@ -7,21 +7,24 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/skeleton.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}">
   <title>Ultimate Decision Maker</title>
 </head>
 
 <body>
   <header>
+    <h1 class="title">The Ultimate Decision Maker</h1>
     <nav class="main_nav">
       <ul>
       {% block nav_bar %}
-        <li><p class="active">Home</p></li>
-        <li><p>Register</p></li>
-        <li><a>Login</a></li>
+        <li>
+        <a>Home</a></li><li>
+        <a>Register</a></li><li>
+        <a>Login</a></li>
       {% endblock nav_bar %}
       </ul>
     </nav>
-    <h3>Welcome to the Ultimate Decision Maker. Find you daily destiny here! </h3>
+    <div><span class="sexy_line"></span></div>
 
 
 

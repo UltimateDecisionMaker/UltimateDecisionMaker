@@ -2,14 +2,14 @@
 
 {% block content %}
 <div class="container">
-  <h1>Welcome to Ultimate Decision Maker.</h1>
+  <h2>Welcome to Ultimate Decision Maker.</h2>
   <p>This is a place where you can tell us what your choices are,</p>
   <p>And we will find the best one for you.</p>
   <p>...</p>
   <p>No more pondering, Life can be this easy!</p>
 </div>
 
-<div class="input">
+<div class="container input">
   <h3>Now, tell us your choices</h3>
   <form action="{{url_for('handle_choice')}}" method="post">
     <input type="text" name="projectFilePath">
