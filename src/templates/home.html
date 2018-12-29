@@ -25,5 +25,36 @@
 </div>
 {% endif %}
 
+<!--new try for dynamic templates-->
+
+<div class="element-wrapper">
+  <div class="row">
+    <input type="text" placeholder="Your Choice" />
+    <button class="btn-remove-row">
+      Remove row
+    </button>
+  </div>
+</div>
+
+<button class="btn-add-row">
+  Add new row
+</button>
+<!-- just to display all potential errors -->
+{% if form.errors %}
+    <ul class="errors">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+</form>
+
 {% endblock content%}
 
+{% block scripts %}
+<!--new try for dynamic scripts-->
+
+{% endblock scripts %}

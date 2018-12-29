@@ -18,3 +18,6 @@ class AuthForm(FlaskForm):
     email = StringField('email', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
 
+
+class C_Form(FlaskForm):
+    choice = StringField('choice', validators=[DataRequired()])
