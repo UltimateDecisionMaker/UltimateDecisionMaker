@@ -2,6 +2,8 @@ from flask import render_template, request, Blueprint, jsonify, current_app
 from git import Repo
 import hmac
 
+webhook = Blueprint('webhook', __name__, url_prefix='')
+
 @app.route('/webhooks/github', methods=['POST'])
 def handle_github_hook():
     """
