@@ -10,7 +10,7 @@ def home():
     """
     form = ChoiceForm()
 
-    # import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()d
     if form.validate_on_submit():
         choice1 = form.data['choice1']
         choice2 = form.data['choice2']
