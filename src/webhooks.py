@@ -20,4 +20,4 @@ def handle_github_hook():
 
         commit = request.json['after'][0:6]
         print('Repository updated with commit {}'.format(commit))
-    return jsonify({}), 200
+    return jsonify({}), 2001
