@@ -1,5 +1,5 @@
 from . import app
-from flask import render_template
+from flask import render_template, request, Blueprint, jsonify, current_app
 from .forms import ChoiceForm
 import random
 
@@ -18,10 +18,3 @@ def home():
         return render_template('home.html', decision=decision, form=form)
 
     return render_template('home.html', form=form)
-
-# @app.route('/webhooks/github', methods=['POST'])
-# def github_post():
-#     """
-#     """
-#     sender =  req.body.sender;
-#     branch = req.body.ref;
