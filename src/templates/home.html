@@ -9,26 +9,13 @@
 </div>
 
 <div class="input">
-  <h3>How many things are you considering?</h3>
-  <form action="{{url_for('home')}}" method="POST">
-    <input type="text" name="number" />
-    {{form.csrf_token}}
-    <input type="submit" value="This many">
-    </form>
-  </div>
-
-{% if number %}
-<div class="input">
   <h3>What are you trying to decide between?</h3>
   <form action="{{url_for('home')}}" method="POST">
-    {% for num in range(number) %}
-    <input type="text" name={{'choice' ~ num}} />
-    {% endfor %}
+    {{ form.choices(cols="35", rows="20") }}
     {{ form.csrf_token }}
-    <input type="submit" value="Decide for Me">
+    <p><input type="submit" value="Decide for Me"></p>
   </form>
 </div>
-{% endif %}
 
 
 {% if decision %}
