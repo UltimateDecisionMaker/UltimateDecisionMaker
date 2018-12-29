@@ -17,7 +17,5 @@ def home():
         decision = random.choice([choice1, choice2])
         return render_template('home.html', decision=decision, form=form)
 
+    # return render_template("edit.html", form=form)
     return render_template('home.html', form=form)
-
-
-
