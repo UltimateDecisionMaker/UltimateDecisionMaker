@@ -66,6 +66,9 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "SHA256:plFVCkNFJBO4L8n/D/OWi4oytvfHTbDVXL51zOxbsa4"
+
+      - run: ssh-keyscan $EC2_INSTANCE >> ~/.ssh/known_hosts
+
       - run:
           name: Deploy Over SSH
           command: |
