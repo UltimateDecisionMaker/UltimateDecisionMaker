@@ -12,7 +12,8 @@ jobs:
         environment:
             PGHOST: 127.0.0.1
             PGUSER: postgresql
-
+            EC2_INSTANCE: ec2-34-220-109-173.us-west-2.compute.amazonaws.com
+            EC2_USER: ubuntu
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -61,3 +62,10 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
+
+        steps:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $EC2_USER@$EC2_INSTANCE "echo 'i made it!'"
+
