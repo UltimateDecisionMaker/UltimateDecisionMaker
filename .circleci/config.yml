@@ -63,6 +63,9 @@ jobs:
           path: test-reports
           destination: test-reports
 
+      - add_ssh_keys:
+          fingerprints:
+            - "61:98:23:6d:e8:17:ea:ed:57:dc:c4:11:03:b8:ff:6b"
       - run:
           name: Deploy Over SSH
           command: |
