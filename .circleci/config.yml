@@ -14,6 +14,7 @@ jobs:
             PGUSER: postgresql
             EC2_INSTANCE: ec2-34-220-109-173.us-west-2.compute.amazonaws.com
             EC2_USER: ubuntu
+            DEPLOY_SCRIPT: /home/ubuntu/UltimateDecisionMaker/deploy.sh
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -72,5 +73,5 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh -v $EC2_USER@$EC2_INSTANCE "echo 'i made it!!'"
+            ssh -v $EC2_USER@$EC2_INSTANCE "$DEPLOY_SCRIPT"
 
