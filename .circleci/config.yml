@@ -63,7 +63,6 @@ jobs:
           path: test-reports
           destination: test-reports
 
-        steps:
       - run:
           name: Deploy Over SSH
           command: |
