@@ -67,5 +67,5 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $EC2_USER@$EC2_INSTANCE "echo 'i made it!'"
+            ssh $EC2_USER@$EC2_INSTANCE "echo 'i made it!!'"
 
