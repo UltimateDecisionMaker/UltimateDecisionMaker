@@ -1,6 +1,6 @@
 from . import app
 from flask import render_template
-from .forms import ChoiceForm, C_Form
+from .forms import ChoiceForm, C_Form, CompanyForm, LocationForm
 import random
 
 
@@ -9,10 +9,10 @@ def home():
     """
     """
     old_form = ChoiceForm()
-    form = C_Form()
+    form = CompanyForm()
 
     # import pdb; pdb.set_trace()
-    if form.validate_on_submit():
+    if old_form.validate_on_submit():
         choice1 = old_form.data['choice1']
         choice2 = old_form.data['choice2']
         decision = random.choice([choice1, choice2])

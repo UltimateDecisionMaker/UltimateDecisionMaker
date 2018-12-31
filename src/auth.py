@@ -8,7 +8,6 @@ from .models import db, Account
 def register():
     """
     """
-
     form = AuthForm()
 
     error = None

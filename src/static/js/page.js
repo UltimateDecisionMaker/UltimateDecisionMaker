@@ -1,3 +1,5 @@
+
+// add row handle
 $(document).on("click", ".btn-add-row", function(){
     var row = $(".row").eq(0).clone().show();
     $(".element-wrapper").append(row);
@@ -7,7 +9,7 @@ $(document).on("click", ".btn-add-row", function(){
 $(document).on("click", ".btn-remove-row", function() {
     // get the index of btn first
     var index = $(".btn-remove-row").index(this);
-    console.log("index = ", index)
+    console.log("removing row with index = ", index)
     // now we remove
     $(".row").eq(index).remove();
 })

@@ -13,11 +13,18 @@
   <form action="{{url_for('home')}}" method="POST">
     <input type="text" name="choice1" />
     <input type="text" name="choice2" />
-    {{ form.csrf_token }}
+    {{ old_form.csrf_token }}
     <input type="submit" value="Decide for Me">
   </form>
+<!--
+  <form action="" method="post" role="form">
+    {{ form.hidden_tag() }}
+    {{ form.company_name() }}
+    {{ form.locations() }}
+    <input type="submit" value="Submit!" />
+</form>
 </div>
-
+-->
 {% if decision %}
 <div class="decision">
   <h3>DECISION MADE:</h3>
@@ -27,19 +34,26 @@
 
 <!--new try for dynamic templates-->
 
-<div class="element-wrapper">
-  <div class="row">
-    <input type="text" placeholder="Your Choice" />
-    <button class="btn-remove-row">
-      Remove row
-    </button>
-  </div>
-</div>
-
 <button class="btn-add-row">
   Add new row
 </button>
-<!-- just to display all potential errors -->
+
+<form class="special-form" action="" method="post" role="form">
+<div class="element-wrapper">
+    <div class="row">
+      <input type="text" placeholder="Your Choice" />
+      <button class="btn-remove-row">
+        Remove row
+      </button>
+    </div>
+</div>
+
+</form>
+
+
+
+
+<!-- just to display all potential errors
 {% if form.errors %}
     <ul class="errors">
         {% for field_name, field_errors in form.errors|dictsort if field_errors %}
@@ -49,8 +63,8 @@
         {% endfor %}
     </ul>
 {% endif %}
+-->
 
-</form>
 
 {% endblock content%}
 
