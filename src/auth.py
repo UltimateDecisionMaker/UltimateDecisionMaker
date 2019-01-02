@@ -1,7 +1,44 @@
 from . import app
 from .forms import AuthForm
-from flask import render_template, session, flash, redirect, url_for
+from flask import render_template, session, flash, redirect, url_for, g
 from .models import db, Account
+import functools
+
+
+# Decorator:
+def login_required(view):
+    """
+    Here, view is a function. This decorator wrap up this function
+    and require
+    """
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            # you can choose to redirect or abort
+            # abort(404)
+            flash("Please login first.")
+            return redirect(url_for('.login'))
+
+        # import pdb; pdb.set_trace()
+        return view(**kwargs)
+
+    # notice that we return uncalled wrapped_view function
+    return wrapped_view
+
+
+@app.before_request
+def load_logged_in_user():
+    """
+    Go get the user id from session if exist
+    """
+    # import pdb; pdb.set_trace()
+    # user_id = session.get('user_id')
+    account_id = session.get('account_id')
+
+    if account_id is None:
+        g.user = None
+    else:
+        g.user = Account.query.get(account_id)
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -59,4 +96,4 @@ def logout():
     """
     session.clear()
     flash('Logged out!')
-    return redirect(url_for('.login'))
+    return redirect(url_for('.home'))

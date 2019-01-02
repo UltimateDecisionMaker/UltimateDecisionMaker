@@ -1,5 +1,5 @@
 from . import app
-from flask import render_template, request
+from flask import render_template, request, g
 from .forms import ChoiceForm, C_Form, CompanyForm, LocationForm
 import random
 
@@ -35,3 +35,7 @@ def home():
 
     return render_template('home.html', form=form, old_form=old_form)
     # return render_template('home.html')
+
+
+# @app.route('/history/<user_id>', methods=['POST', 'GET'])
+# def hisotry():
