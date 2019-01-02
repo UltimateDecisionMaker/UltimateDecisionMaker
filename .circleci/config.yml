@@ -71,4 +71,14 @@ jobs:
           name: Deploy Over SSH
           command: |
             ssh -v $EC2_USER@$EC2_INSTANCE "$DEPLOY_SCRIPT"
-
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
