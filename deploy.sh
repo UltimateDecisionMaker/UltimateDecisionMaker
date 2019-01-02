@@ -1,8 +1,6 @@
 #!/bin/bash
 
 cd /home/ubuntu/UltimateDecisionMaker/
-# making sure deploy script is executable..
-chmod u+x deploy.sh
 echo "==========================="
 echo "Pulling from master..."
 echo "==========================="
