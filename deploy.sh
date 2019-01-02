@@ -1,11 +1,12 @@
 #!/bin/bash
 
 cd /home/ubuntu/UltimateDecisionMaker/
+# making sure deploy script is executable..
+chmod u+x deploy.sh
 echo "==========================="
 echo "Pulling from master..."
 echo "==========================="
-git reset --hard
-git pull origin master
+git reset --hard origin/master
 echo "==========================="
 echo "Pull from master successful!"
 echo "==========================="
@@ -19,7 +20,7 @@ echo " "
 echo "==========================="
 echo "Restarting gunicorn..."
 echo "==========================="
-sudo systemctl gunicorn restart
+sudo systemctl restart gunicorn
 echo " "
 echo " "
 echo "==========================="
