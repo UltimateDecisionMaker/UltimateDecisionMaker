@@ -24,5 +24,5 @@ sudo systemctl gunicorn restart
 echo " "
 echo " "
 echo "==========================="
-echo      "Deploy to EC2 complete!"
+echo   "Deploy to EC2 complete!"
 echo "==========================="
