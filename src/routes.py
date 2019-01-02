@@ -1,6 +1,6 @@
 from . import app
-from flask import render_template
-from .forms import ChoiceForm
+from flask import render_template, request
+from .forms import ChoiceForm, C_Form, CompanyForm, LocationForm
 import random
 
 
@@ -8,16 +8,30 @@ import random
 def home():
     """
     """
-    form = ChoiceForm()
+    data = request.form
+    keys = list(data.keys())
+    values = list(data.values())
 
+    old_form = ChoiceForm()
+    form = CompanyForm()
     # import pdb; pdb.set_trace()
-    if form.validate_on_submit():
-        choice1 = form.data['choice1']
-        choice2 = form.data['choice2']
-        decision = random.choice([choice1, choice2])
-        return render_template('home.html', decision=decision, form=form)
 
-    return render_template('home.html', form=form)
+    # notice, to randomly select n out of m items:
+    # random.shuffle(arr)
+    # Take the first 2 elements of the now randomized array
+    # print arr[0:2]
 
+    if len(keys) > 1:
+        decision = random.choice(values)
+        return render_template('home.html', decision=decision, form=form, old_form=old_form)
 
+    # if old_form.validate_on_submit():
+    #     choice1 = old_form.data['choice1']
+    #     choice2 = old_form.data['choice2']
+    #     decision = random.choice([choice1, choice2])
+    #     return render_template('home.html', decision=decision, form=form, old_form=old_form)
 
+    # return render_template("edit.html", form=form)
+
+    return render_template('home.html', form=form, old_form=old_form)
+    # return render_template('home.html')
