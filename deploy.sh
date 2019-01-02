@@ -23,5 +23,5 @@ sudo systemctl gunicorn restart
 echo " "
 echo " "
 echo "==========================="
-echo "Deploy completed"
+echo      "Deploy completed"
 echo "==========================="
