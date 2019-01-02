@@ -4,8 +4,7 @@ cd /home/ubuntu/UltimateDecisionMaker/
 echo "==========================="
 echo "Pulling from master..."
 echo "==========================="
-git reset --hard
-git pull origin/master
+git reset --hard origin/master
 echo "==========================="
 echo "Pull from master successful!"
 echo "==========================="
