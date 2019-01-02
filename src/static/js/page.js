@@ -2,26 +2,33 @@
 // add row handle
 // to keep track of the input item.
 $(document).ready(function(){
-    var max_fields = 5; //maximum input boxes allowed
+    var max_fields = 10; //maximum input boxes allowed
     var wrapper = $(".element-wrapper"); //Fields wrapper
     var add_button = $(".btn-add-row"); //Add button ID
 
     var x = 1; //initlal text box count
 
-    $(document).on("click", ".btn-add-row", function(){
+    // user click on add botton
+    // $(document).on("click", ".btn-add-row", function(){
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
         if (x < max_fields) {
             x++;
             $(".element-wrapper").append(
                 '<div class="form-group">' +
-                '<input class="form-control" type="text" placeholder="Your Choice" name="choice' + x + '"/>' +
-                '<button class="btn-remove-row"> Remove row </button></div>');
+                '<input class="form-control" type="text" placeholder="Your Choice" name="choice_' + x + '"/>' +
+                '<button class="btn-remove-row" name="remove_' + x + '"> Remove row </button></div>');
         }
     });
 
-    $(wrapper).on("click",".btn-remove-row", function(e){ //user click on remove field
+    //user click on remove field
+    $(wrapper).on("click",".btn-remove-row", function(e){
         e.preventDefault(); $(this).parent('div').remove(); x--;
         var index = $(".btn-remove-row").index(this);
         console.log("removing row with index = ", index)
+        console.log("removing row with index = ", e.name)
+        console.log("removing row with index = ", this.getAttribute('class'))
+        console.log("removing row with index = ", this.getAttribute('name'))
     });
 });
 
