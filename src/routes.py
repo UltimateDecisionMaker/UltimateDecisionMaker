@@ -1,10 +1,11 @@
 from . import app
-from flask import render_template, request
+from flask import render_template, request, current_app
 # from .forms import ChoiceForm, C_Form, CompanyForm, LocationForm
 import random
-
+import string
 
 @app.route('/', methods=['POST', 'GET'])
+# @app.cache.cached(timeout=300)  # cache this view for 5 minutes
 def home():
     """
     """
@@ -20,8 +21,9 @@ def home():
 
     # check if user has valid input
     if len(keys) > 1:
+        # import pdb; pdb.set_trace()
         decision = random.choice(values)
-        return render_template('home.html', decision=decision)
+        return render_template('home.html', decision=decision, values=values, string=string)
         # return render_template('home.html', decision=decision, form=form, old_form=old_form)
 
     # if old_form.validate_on_submit():
@@ -33,7 +35,7 @@ def home():
     # return render_template("edit.html", form=form)
 
     # return render_template('home.html', form=form, old_form=old_form)
-    return render_template('home.html')
+    return render_template('home.html', string=string)
 
 
 # @app.route('/history/<user_id>', methods=['POST', 'GET'])

@@ -8,36 +8,53 @@
   and hit the button, and we'll do the hard work for you.</p>
 </div>
 
+
+<!--new try for dynamic templates 1
+-->
+<button class="btn-add-row">
+  Add new row
+</button>
+
+{% if values %}
+  <form class="special-form" action="{{url_for('home')}}" method="post" role="form">
+    <div class="element-wrapper">
+    {% for value in values %}
+      <div class="form-group">
+        <input class="form-control" type="text" value={{ value }} name={{"choice_" + (values.index(value)+1)|string}} />
+        <button class="btn-remove-row" name={{"remove_" + (values.index(value)+1)|string}} >
+          Remove row
+        </button>
+      </div>
+    {% endfor %}
+    </div>
+    <br>
+    <input type="submit" value="Submit!" />
+  </form>
+{% else %}
+
+  <form class="special-form" action="{{url_for('home')}}" method="post" role="form">
+    <div class="element-wrapper">
+        <!--<div class="row">-->
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Your Choice" name="choice_1"/>
+          <button class="btn-remove-row" name="remove_1">
+            Remove row
+          </button>
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="Submit!" />
+    <!--<button class="decision-button" type="submit">Decide for Me!</button>-->
+  </form>
+
+{% endif %}
+
 {% if decision %}
 <div class="decision">
   <h3>DECISION MADE:</h3>
   <p> {{ decision }} it is! </p>
 </div>
 {% endif %}
-
-<!--new try for dynamic templates 1
--->
-
-<button class="btn-add-row">
-  Add new row
-</button>
-
-<form class="special-form" action="{{url_for('home')}}" method="post" role="form">
-  <div class="element-wrapper">
-      <!--<div class="row">-->
-      <div class="form-group">
-        <input class="form-control" type="text" placeholder="Your Choice" name="choice_1"/>
-        <button class="btn-remove-row" name="remove_1">
-          Remove row
-        </button>
-      </div>
-  </div>
-  <br>
-  <input type="submit" value="Submit!" />
-  <!--<button class="decision-button" type="submit">Decide for Me!</button>-->
-</form>
-
-
 
 
 {% endblock content%}
