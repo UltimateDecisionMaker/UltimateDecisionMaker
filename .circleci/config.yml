@@ -12,7 +12,9 @@ jobs:
         environment:
             PGHOST: 127.0.0.1
             PGUSER: postgresql
-
+            EC2_INSTANCE: ec2-34-220-109-173.us-west-2.compute.amazonaws.com
+            EC2_USER: ubuntu
+            DEPLOY_SCRIPT: /home/ubuntu/UltimateDecisionMaker/deploy.sh
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -61,3 +63,11 @@ jobs:
       - store_artifacts:
           path: test-reports
           destination: test-reports
+
+      - run: ssh-keyscan $EC2_INSTANCE >> ~/.ssh/known_hosts
+
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh -v $EC2_USER@$EC2_INSTANCE "$DEPLOY_SCRIPT"
+
