@@ -15,6 +15,7 @@ jobs:
             EC2_INSTANCE: ec2-34-220-109-173.us-west-2.compute.amazonaws.com
             EC2_USER: ubuntu
             DEPLOY_SCRIPT: /home/ubuntu/UltimateDecisionMaker/deploy.sh
+            CHANGE_PERMISSION: chmod u+x
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
