@@ -1,6 +1,6 @@
 from . import app
 from .forms import AuthForm
-from flask import render_template, session, flash, redirect, url_for
+from flask import render_template, session, flash, redirect, url_for, g
 from .models import db, Account
 
 
@@ -29,6 +29,15 @@ def register():
             return redirect(url_for('.login'))
 
     return render_template('auth/register.html', form=form, error=error)
+
+@app.before_request
+def load_logged_in_account():
+    account_id = session.get('account_id')
+
+    if account_id is None:
+        g.user = None
+    else:
+        g.user = Account.query.get(account_id)
 
 
 @app.route('/login', methods=['POST', 'GET'])
