@@ -69,5 +69,5 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh -v $EC2_USER@$EC2_INSTANCE "$DEPLOY_SCRIPT"
+            ssh -v $EC2_USER@$EC2_INSTANCE "sudo $DEPLOY_SCRIPT"
 
