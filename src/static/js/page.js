@@ -1,18 +1,47 @@
 
 // add row handle
-$(document).on("click", ".btn-add-row", function(){
-    var row = $(".row").eq(0).clone().show();
-    $(".element-wrapper").append(row);
+// to keep track of the input item.
+$(document).ready(function(){
+    var max_fields = 5; //maximum input boxes allowed
+    var wrapper = $(".element-wrapper"); //Fields wrapper
+    var add_button = $(".btn-add-row"); //Add button ID
+
+    var x = 1; //initlal text box count
+
+    $(document).on("click", ".btn-add-row", function(){
+        if (x < max_fields) {
+            x++;
+            $(".element-wrapper").append(
+                '<div class="form-group">' +
+                '<input class="form-control" type="text" placeholder="Your Choice" name="choice' + x + '"/>' +
+                '<button class="btn-remove-row"> Remove row </button></div>');
+        }
+    });
+
+    $(wrapper).on("click",".btn-remove-row", function(e){ //user click on remove field
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+        var index = $(".btn-remove-row").index(this);
+        console.log("removing row with index = ", index)
+    });
 });
 
-// remove row handle
-$(document).on("click", ".btn-remove-row", function() {
-    // get the index of btn first
-    var index = $(".btn-remove-row").index(this);
-    console.log("removing row with index = ", index)
-    // now we remove
-    $(".row").eq(index).remove();
-})
+// when decision pressed
+$(function() {
+    $('.decision-button').click(function() {
+        $.ajax({
+            url: '/',
+            data: $(".form-control").serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+
 
 // $(function() {
 //     $("div[data-toggle=fieldset]").each(function() {

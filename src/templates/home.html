@@ -8,23 +8,6 @@
   and hit the button, and we'll do the hard work for you.</p>
 </div>
 
-<div class="input">
-  <h3>What are you trying to decide between?</h3>
-  <form action="{{url_for('home')}}" method="POST">
-    <input type="text" name="choice1" />
-    <input type="text" name="choice2" />
-    {{ old_form.csrf_token }}
-    <input type="submit" value="Decide for Me">
-  </form>
-<!--
-  <form action="" method="post" role="form">
-    {{ form.hidden_tag() }}
-    {{ form.company_name() }}
-    {{ form.locations() }}
-    <input type="submit" value="Submit!" />
-</form>
-</div>
--->
 {% if decision %}
 <div class="decision">
   <h3>DECISION MADE:</h3>
@@ -32,22 +15,26 @@
 </div>
 {% endif %}
 
-<!--new try for dynamic templates-->
+<!--new try for dynamic templates 1
+-->
 
 <button class="btn-add-row">
   Add new row
 </button>
 
-<form class="special-form" action="" method="post" role="form">
-<div class="element-wrapper">
-    <div class="row">
-      <input type="text" placeholder="Your Choice" />
-      <button class="btn-remove-row">
-        Remove row
-      </button>
-    </div>
-</div>
-
+<form class="special-form" action="{{url_for('home')}}" method="post" role="form">
+  <div class="element-wrapper">
+      <!--<div class="row">-->
+      <div class="form-group">
+        <input class="form-control" type="text" placeholder="Your Choice" name="choice1"/>
+        <button class="btn-remove-row">
+          Remove row
+        </button>
+      </div>
+  </div>
+  <br>
+  <input type="submit" value="Submit!" />
+  <!--<button class="decision-button" type="submit">Decide for Me!</button>-->
 </form>
 
 
