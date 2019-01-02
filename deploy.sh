@@ -20,7 +20,7 @@ echo " "
 echo "==========================="
 echo "Restarting gunicorn..."
 echo "==========================="
-sudo systemctl gunicorn restart
+sudo systemctl restart gunicorn
 echo " "
 echo " "
 echo "==========================="
