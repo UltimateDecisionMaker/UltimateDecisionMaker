@@ -26,26 +26,25 @@
       </div>
     {% endfor %}
     </div>
-  </form>
 
     {% if decision %}
-    <div class="decision offset-by-ten column">
+    <div class="decision">
       <h3>DECISION MADE:</h3>
       <p> {{ decision }} it is! </p>
       <br>
-      <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Re-Select</button>
-      <button class="decision-button" type="submit" name="submit-button" value="go-with-it">Go with it</button>
-      <br>
       <p> Now we have made a decision for you. Are you glad you end up with<strong> {{ decision }} </strong>?</p>
       <p> Hit "Go with it" to save your decision!</p>
+      <button class="decision-button" type="submit" name="submit-button" value="decide-for-me" >Re-Select</button>
       <br>
       <p> Or, are you secretly hoping you will end up with something else?</p>
       <p> Modify your options and hit "Re-Select"!</p>
+      <button class="decision-button" type="submit" name="submit-button" value="go-with-it" >Go with it</button>
     </div>
     {% endif %}
     <!--
     <input type="submit" value="Submit!" />
     -->
+  </form>
 
 
 {% else %}

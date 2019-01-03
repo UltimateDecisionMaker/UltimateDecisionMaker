@@ -5,9 +5,7 @@ from flask import render_template, request, flash, g
 from .models import History, db, Decision
 from sqlalchemy.exc import IntegrityError, DBAPIError
 from werkzeug.utils import secure_filename
-import os
 from .auth import login_required
-
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -22,36 +20,40 @@ def home():
     content_keys = list(data.keys())[:-1]
     values = list(data.values())[:-1]
 
-    # notice, to randomly select n out of m items:
-    # random.shuffle(arr)
-    # Take the first 2 elements of the now randomized array
-    # print arr[0:2]
-
     if (request.method == 'POST') and (request.form["submit-button"] == "decide-for-me"):
+        flash("decide-for-me called!")
+        data = request.form
+        content_keys = list(data.keys())[:-1]
+        values = list(data.values())[:-1]
         decision = random.choice(values)
         return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
-        # if g.user:
-    if (g.user) and (request.method == 'POST') and (request.form["submit-button"] == "go-with-it"):
-        options = ', '.join(values)
-        try:
-            history = History(
-                options=options,
-                account_id=g.user.id
-            )
 
-            new_decision = Decision(
-                decision=decision,
-                account_id=g.user.id
-            )
-            db.session.add(history)
-            db.session.add(new_decision)
-            db.session.commit()
-            flash("Success! Decision made and saved into your user history!")
+    if (request.method == 'POST') and (request.form["submit-button"] == "go-with-it"):
+        flash("go-with-it called!")
+        if g.user:
+            options = ', '.join(values)
+            try:
+                history = History(
+                    options=options,
+                    account_id=g.user.id
+                )
+
+                new_decision = Decision(
+                    decision=decision,
+                    account_id=g.user.id
+                )
+                db.session.add(history)
+                db.session.add(new_decision)
+                db.session.commit()
+
+                flash("Success! Decision made and saved into your user history!")
+            # return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
+
+            except (DBAPIError, IntegrityError):
+                flash('Something went wrong.')
+
             return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
 
-        except (DBAPIError, IntegrityError):
-            flash('Something went wrong.')
-            return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
     return render_template('home.html', values=values, content_keys=content_keys)
 
 
