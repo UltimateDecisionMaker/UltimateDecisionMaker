@@ -1,8 +1,7 @@
 import pytest
-# from flask import request
 from .. import app as _app
 from ..models import db as _db
-from ..models import Account
+from ..models import Account, Decision, History
 import os
 
 
@@ -74,7 +73,7 @@ def client(app, db, session):
 
 @pytest.fixture()
 def user(session):
-    account = Account(email='test', password='1234')
+    account = Account(email='test@test.com', password='1234')
 
     session.add(account)
     session.commit()
@@ -88,18 +87,6 @@ def authenticated_client(client, user):
         data={'email': user.email, 'password': '1234'},
         follow_redirects=True,
     )
+    yield client
 
-
-
-# @pytest.fixture()
-# def portfolio(session, account):
-#     """
-#     """
-#     portfolio = Portfolio(
-#         name='Default',
-#         account_id=account.id
-#     )
-
-#     session.add(portfolio)
-#     session.commit()
-#     return portfolio
+    client.get('/logout')
