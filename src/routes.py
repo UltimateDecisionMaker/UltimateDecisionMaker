@@ -137,6 +137,7 @@ def vision():
 
 
 @app.route('/history')
+@login_required
 def history():
     histories = History.query.filter_by(account_id=g.user.id).all()
     decisions = Decision.query.filter_by(account_id=g.user.id).all()
