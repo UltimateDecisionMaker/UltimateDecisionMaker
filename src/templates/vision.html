@@ -10,7 +10,7 @@
     <button class="btn-add-row">
       Add new row
     </button>
-    <form class="special-form" method="post" role="form"> <!--removed action=.home-->
+    <form class="special-form one-half column" method="post" role="form"> <!--removed action=.home-->
       <div class="element-wrapper">
       {% for c in range(choices | length) %}
         <div class="form-group">
@@ -20,7 +20,7 @@
           </button>
         </div>
       {% endfor %}
-
+    </div>
     <br>
     <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Decide for Me!</button>
 
@@ -36,12 +36,12 @@
   {% endif %}
 
   {% if decision %}
-  <div class="decision">
+  <div class="decision one-half column">
     <h3>DECISION MADE:</h3>
     <p> {{ decision }} it is! </p>
     <br>
-    <button class="decision-button" type="submit">Re-Select</button>
-    <button class="decision-button" type="submit">Go with it</button>
+    <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Re-Select</button>
+    <button class="decision-button" type="submit" name="submit-button" value="go-with-it">Go with it</button>
     <br>
     <p> Now we have made a decision for you. Are you glad you end up with<strong> {{ decision }} </strong>?</p>
     <p> Hit "Go with it" to save your decision!</p>

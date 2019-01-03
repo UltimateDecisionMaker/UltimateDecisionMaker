@@ -3,10 +3,10 @@ In this file, we test the app we built. The basic guideline is to have at least 
 for each funtion we have. One for normal case; one for edge case; and one for failed case.
 """
 
-# import pytest
+import pytest
 from .. import app
-# from flask import request
-# from werkzeug import ImmutableMultiDict
+from flask import request
+from werkzeug import ImmutableMultiDict
 
 
 def input_for_test(app):
@@ -34,7 +34,7 @@ def test_home():
 def test_home_input(app):
     """
     """
-    rv = app.test_client().post('/', data={'choice1': 'burger', 'choice2': 'pizza'}, follow_redirects=True)
+    rv = app.test_client().post('/', data={'submit-button': 'decide-for-me', 'choice_1': 'burger', 'choice_2': 'pizza'}, follow_redirects=True)
 
     assert b"DECISION MADE:" in rv.data
     assert (b'burger' in rv.data) or (b'pizza' in rv.data)

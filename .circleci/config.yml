@@ -65,10 +65,10 @@ jobs:
           path: test-reports
           destination: test-reports
 
-      - run: ssh-keyscan $EC2_INSTANCE >> ~/.ssh/known_hosts
+    #   - run: ssh-keyscan $EC2_INSTANCE >> ~/.ssh/known_hosts
 
-      - run:
-          name: Deploy Over SSH
-          command: |
-            ssh -v $EC2_USER@$EC2_INSTANCE "$DEPLOY_SCRIPT"
+    #   - run:
+    #       name: Deploy Over SSH
+    #       command: |
+    #         ssh -v $EC2_USER@$EC2_INSTANCE "$DEPLOY_SCRIPT"
 

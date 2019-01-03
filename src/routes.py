@@ -1,51 +1,56 @@
+import os
+import random
 from . import app
 from flask import render_template, request, flash, g
 from .models import History, db, Decision
-import random
 from sqlalchemy.exc import IntegrityError, DBAPIError
 from werkzeug.utils import secure_filename
-import os
+
 
 
 @app.route('/', methods=['POST', 'GET'])
-# @app.cache.cached(timeout=300)  # cache this view for 5 minutes
 def home():
     """
     """
+    global values
+    global decision
+    global content_keys
     # grab data from user inputs in dynamic forms
     data = request.form
-    content_keys = list(data.keys())
-    values = list(data.values())
+    content_keys = list(data.keys())[:-1]
+    values = list(data.values())[:-1]
 
     # notice, to randomly select n out of m items:
     # random.shuffle(arr)
     # Take the first 2 elements of the now randomized array
     # print arr[0:2]
-    
-    if len(content_keys) > 1:
+
+    # if len(content_keys) > 1:
+    if (request.method == 'POST') and (request.form["submit-button"] == "decide-for-me"):
         decision = random.choice(values)
-        if g.user:
-            options = ', '.join(values)
-            try:
-                history = History(
-                    options=options,
-                    account_id=g.user.id
-                )
-
-                new_decision = Decision(
-                    decision=decision,
-                    account_id=g.user.id
-                )
-                db.session.add(history)
-                db.session.add(new_decision)
-                db.session.commit()
-
-            except (DBAPIError, IntegrityError):
-                flash('Something went wrong.')
-                return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
-#                 return render_template('home.html', form=form, old_form=old_form)
         return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
+        # if g.user:
+    if (g.user) and (request.method == 'POST') and (request.form["submit-button"] == "go-with-it"):
+        options = ', '.join(values)
+        try:
+            history = History(
+                options=options,
+                account_id=g.user.id
+            )
 
+            new_decision = Decision(
+                decision=decision,
+                account_id=g.user.id
+            )
+            db.session.add(history)
+            db.session.add(new_decision)
+            db.session.commit()
+            flash("Success! Decision made and saved into your user history!")
+            return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
+
+        except (DBAPIError, IntegrityError):
+            flash('Something went wrong.')
+            return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
     return render_template('home.html', values=values, content_keys=content_keys)
 
 
@@ -57,6 +62,9 @@ def allowed_file(filename):
 @app.route('/vision', methods=['POST', 'GET'])
 def vision():
     global img_name
+    global choices
+    global decision
+    # initial upload
     if (request.method == 'POST') and (request.form["submit-button"] == "Upload"):
         if 'file' not in request.files:
             flash('No file part')
@@ -78,33 +86,52 @@ def vision():
 
             image = types.Image(content=content)
 
-            # response = client.label_detection(image=image)
-            # labels = response.label_annotations
             response = client.text_detection(image=image)
             texts = response.text_annotations
-
-            # for label in labels:
-            #     print(label.description)
             img_name = file.filename
-            # return render_template('vision.html', img_name=file.filename, choices=labels)
 
+            # reformat choices to make conditions compatible.
             choices = [_.description for _ in texts]
 
             return render_template('vision.html', img_name=img_name, choices=choices)
 
+    # when user hit decide for me, or re-select.
     if (request.method == 'POST') and (request.form["submit-button"] == "decide-for-me"):
-        # file = request.files['file']
         data = request.form
         choices = list(data.values())[:-1]
         decision = random.choice(choices)
-        # import pdb; pdb.set_trace()
-        # return render_template('vision.html', img_name=file.filename, choices=choices, decision=decision)
         return render_template('vision.html', img_name=img_name, choices=choices, decision=decision)
 
+    # when user hit go-with-it, we push and save it to database.
+    if (request.method == 'POST') and (request.form["submit-button"] == "go-with-it"):
+        if g.user:
+            options = ', '.join(choices)
+            try:
+                history = History(
+                    options=options,
+                    account_id=g.user.id
+                )
+
+                new_decision = Decision(
+                    decision=decision,
+                    account_id=g.user.id
+                )
+                db.session.add(history)
+                db.session.add(new_decision)
+                db.session.commit()
+
+            except (DBAPIError, IntegrityError):
+                flash('Something went wrong.')
+                return render_template('vision.html', img_name=img_name, choices=choices)
+        # hum...maybe we shall re direct user to some other place
+        flash("Success! Decision made and saved into your user history!")
+        return render_template('vision.html', img_name=img_name, choices=choices, decision=decision)
+                # return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
+#                 return render_template('home.html', form=form, old_form=old_form)
 
     return render_template('vision.html')
 
-  
+
 @app.route('/history')
 def history():
     histories = History.query.filter_by(account_id=g.user.id).all()
