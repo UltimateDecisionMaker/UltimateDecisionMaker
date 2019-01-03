@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+  <h2>Previous decisions:</h2>
+  {% for i in range(histories | length) %}
+    <p> On {{histories[i].date_created.strftime('%B %d, %Y') }} you considered {{histories[i].options}}. Ultimately, you chose {{decisions[i].decision}} </p>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -8,6 +8,18 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
+class Decision(db.Model):
+
+    __tablename__ = 'decisions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.ForeignKey('accounts.id'), nullable=False)
+    decision = db.Column(db.String(128))
+    date_created = db.Column(db.DateTime, default=dt.now())
+
+    user = db.relationship('Account', backref='decision', lazy=True)
+
+
 class History(db.Model):
 
     __tablename__ = 'histories'
@@ -15,9 +27,9 @@ class History(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     account_id = db.Column(db.ForeignKey('accounts.id'), nullable=False)
     options = db.Column(db.String(128))
+    date_created = db.Column(db.DateTime, default=dt.now())
 
     user = db.relationship('Account', backref='history', lazy=True)
-
 
 
 class Account(db.Model):
