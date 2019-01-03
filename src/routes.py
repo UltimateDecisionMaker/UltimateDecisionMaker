@@ -5,6 +5,7 @@ import random
 from sqlalchemy.exc import IntegrityError, DBAPIError
 from werkzeug.utils import secure_filename
 import os
+from .auth import login_required
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -21,7 +22,7 @@ def home():
     # random.shuffle(arr)
     # Take the first 2 elements of the now randomized array
     # print arr[0:2]
-    
+
     if len(content_keys) > 1:
         decision = random.choice(values)
         if g.user:
@@ -55,6 +56,7 @@ def allowed_file(filename):
 
 
 @app.route('/vision', methods=['POST', 'GET'])
+@login_required
 def vision():
     global img_name
     if (request.method == 'POST') and (request.form["submit-button"] == "Upload"):
@@ -104,7 +106,7 @@ def vision():
 
     return render_template('vision.html')
 
-  
+
 @app.route('/history')
 def history():
     histories = History.query.filter_by(account_id=g.user.id).all()

@@ -1,69 +1,53 @@
-"""
-In this file, we test the app we built. The basic guideline is to have at least 3 tests
-for each funtion we have. One for normal case; one for edge case; and one for failed case.
-"""
-
-# import pytest
-from .. import app
-# from flask import request
-# from werkzeug import ImmutableMultiDict
+"""Tests for the Ultimate Decision Maker."""
 
 
-def input_for_test(app):
+def test_post_from_home_route(app):
+    """Test posting from the home route without redirection."""
     app.post('/', data=dict(
         choice1='burger',
         choice2='pizza'
     ))
 
 
-def test_imports():
-    """
-    test import app is successful.
-    """
-    assert app
-
-
-def test_home():
-    """
-    """
+def test_home_route_get(app):
+    """Test a get to the home route."""
     rv = app.test_client().get('/')
     assert rv.status_code == 200
     assert b'Let\'s make some decisions!' in rv.data
 
 
 def test_home_input(app):
-    """
-    """
-    rv = app.test_client().post('/', data={'choice1': 'burger', 'choice2': 'pizza'}, follow_redirects=True)
+    """Test posting to the home route with redirects."""
+    rv = app.test_client().post(
+        '/',
+        data={'choice1': 'burger',
+              'choice2': 'pizza'},
+        follow_redirects=True)
 
     assert b"DECISION MADE:" in rv.data
     assert (b'burger' in rv.data) or (b'pizza' in rv.data)
 
+def test_bad_route(app):
+    """Test an invalid route."""
+    rv = app.test_client().get('/foo')
+    assert rv.status_code == 404
 
-# def test_register1():
-#     rv = app.test_client().post('/register', data={'email': 'aaa', 'password': 'bbb'}, follow_redirects=True)
-#     assert b"Login here:" in rv.data
-
-
-# def test_login1():
-#     rv = app.test_client().post('/login', data={'email': 'aaa', 'password': 'bbb'}, follow_redirects=True)
-#     assert b"What are you trying to decide between?" in rv.data
 
 
 class TestAuthentication:
+    """Test authentication and login gating."""
 
     def test_registration_redirect_to_login(self, client):
-        """
-        """
+        """Test the registration redirect."""
         rv = client.post(
             '/register',
             data={'email': 'test@example.com', 'password': 'seekret'},
             follow_redirects=True,
         )
-        # import pdb; pdb.set_trace()
         assert b"Login here:" in rv.data
 
     def test_registration_no_same_email(self, client):
+        """Test that registration fails if the account already exists."""
         tmp = client.post(
             '/register',
             data={'email': 'test@example.com', 'password': 'seekret'},
@@ -78,6 +62,7 @@ class TestAuthentication:
         assert b'test@example.com has already been registered.\n' in rv.data
 
     def test_registered_user_can_login(self, client):
+        """Test that a registered user can successfully login."""
         client.post(
             '/register',
             data={'email': 'test@example.com', 'password': 'seekret'},
@@ -93,6 +78,7 @@ class TestAuthentication:
         assert b'Let\'s make some decisions!' in rv.data
 
     def test_registered_user_bad_login(self, client):
+        """Test that a registered user can't login with a bad password."""
         client.post(
             '/register',
             data={'email': 'test@example.com', 'password': 'seekret'},
@@ -105,5 +91,14 @@ class TestAuthentication:
             follow_redirects=True,
         )
         assert rv.status_code == 200
-        # import pdb; pdb.set_trace()
         assert b'Invalid email or password' in rv.data
+
+    def test_registered_user_vision_route(self, authenticated_client):
+        """Test the vision route for a logged in user."""
+        res = authenticated_client.get('/vision')
+        assert res.status_code == 200
+
+    def test_unauthenticated_user_authenticated_route(self, app):
+        """Test the vision route if the user is not logged in."""
+        res = app.test_client().get('/vision', follow_redirects=True)
+        assert b'Please login first.' in res.data
