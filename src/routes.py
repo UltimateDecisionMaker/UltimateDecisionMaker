@@ -1,10 +1,10 @@
 from . import app
-from flask import render_template, request, flash
-from werkzeug.utils import secure_filename
-# from .forms import ChoiceForm, C_Form, CompanyForm, LocationForm
+from flask import render_template, request, flash, g
+from .models import History, db, Decision
 import random
+from sqlalchemy.exc import IntegrityError, DBAPIError
+from werkzeug.utils import secure_filename
 import os
-# import string
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -21,11 +21,29 @@ def home():
     # random.shuffle(arr)
     # Take the first 2 elements of the now randomized array
     # print arr[0:2]
-
-    # check if user has valid input
+    
     if len(content_keys) > 1:
-        # import pdb; pdb.set_trace()
         decision = random.choice(values)
+        if g.user:
+            options = ', '.join(values)
+            try:
+                history = History(
+                    options=options,
+                    account_id=g.user.id
+                )
+
+                new_decision = Decision(
+                    decision=decision,
+                    account_id=g.user.id
+                )
+                db.session.add(history)
+                db.session.add(new_decision)
+                db.session.commit()
+
+            except (DBAPIError, IntegrityError):
+                flash('Something went wrong.')
+                return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
+#                 return render_template('home.html', form=form, old_form=old_form)
         return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
 
     return render_template('home.html', values=values, content_keys=content_keys)
@@ -85,3 +103,10 @@ def vision():
 
 
     return render_template('vision.html')
+
+  
+@app.route('/history')
+def history():
+    histories = History.query.filter_by(account_id=g.user.id).all()
+    decisions = Decision.query.filter_by(account_id=g.user.id).all()
+    return render_template('history.html', histories=histories, decisions=decisions)
