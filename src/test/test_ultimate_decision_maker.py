@@ -1,6 +1,5 @@
 """Tests for the Ultimate Decision Maker."""
 
-
 def test_post_from_home_route(app):
     """Test posting from the home route without redirection."""
     app.post('/', data=dict(
@@ -18,11 +17,7 @@ def test_home_route_get(app):
 
 def test_home_input(app):
     """Test posting to the home route with redirects."""
-    rv = app.test_client().post(
-        '/',
-        data={'choice1': 'burger',
-              'choice2': 'pizza'},
-        follow_redirects=True)
+    rv = app.test_client().post('/', data={'submit-button': 'decide-for-me', 'choice_1': 'burger', 'choice_2': 'pizza'}, follow_redirects=True)
 
     assert b"DECISION MADE:" in rv.data
     assert (b'burger' in rv.data) or (b'pizza' in rv.data)
