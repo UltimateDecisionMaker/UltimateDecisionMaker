@@ -10,7 +10,7 @@
     <button class="btn-add-row">
       Add new row
     </button>
-    <form class="special-form" method="post" role="form"> <!--removed action=.home-->
+    <form class="special-form one-half column" method="post" role="form"> <!--removed action=.home-->
       <div class="element-wrapper">
       {% for c in range(choices | length) %}
         <div class="form-group">
@@ -36,7 +36,7 @@
   {% endif %}
 
   {% if decision %}
-  <div class="decision">
+  <div class="decision one-half column">
     <h3>DECISION MADE:</h3>
     <p> {{ decision }} it is! </p>
     <br>

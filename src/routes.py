@@ -1,10 +1,11 @@
+import os
+import random
 from . import app
 from flask import render_template, request, flash, g
 from .models import History, db, Decision
-import random
 from sqlalchemy.exc import IntegrityError, DBAPIError
 from werkzeug.utils import secure_filename
-import os
+
 
 
 @app.route('/', methods=['POST', 'GET'])
