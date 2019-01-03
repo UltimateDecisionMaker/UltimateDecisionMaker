@@ -1,6 +1,5 @@
 import os
 from flask import Flask
-from flask_caching import Cache
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -18,6 +17,5 @@ app.config.from_mapping(
     CACHE_TYPE='simple',
 )
 
-app.cache = Cache(app)
 
 from . import auth, models, routes, forms, exceptions

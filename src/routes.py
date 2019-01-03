@@ -1,5 +1,5 @@
 from . import app
-from flask import render_template, request, current_app
+from flask import render_template, request
 # from .forms import ChoiceForm, C_Form, CompanyForm, LocationForm
 import random
 # import string
