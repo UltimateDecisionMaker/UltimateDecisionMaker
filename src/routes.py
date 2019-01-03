@@ -56,7 +56,7 @@ def home():
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-    return '.' in filename and filename.rsplit('.',1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/vision', methods=['POST', 'GET'])
@@ -73,6 +73,7 @@ def vision():
             flash('No selected file')
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+
             save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(save_path)
             import io
@@ -126,8 +127,7 @@ def vision():
         # hum...maybe we shall re direct user to some other place
         flash("Success! Decision made and saved into your user history!")
         return render_template('vision.html', img_name=img_name, choices=choices, decision=decision)
-                # return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
-#                 return render_template('home.html', form=form, old_form=old_form)
+
 
     return render_template('vision.html')
 

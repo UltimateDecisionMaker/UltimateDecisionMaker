@@ -15,7 +15,7 @@
 
 
 {% if values %}
-  <form class="special-form one-half column" action="{{url_for('home')}}" method="post" role="form">
+  <form class="special-form" action="{{url_for('home')}}" method="post" role="form">
     <div class="element-wrapper">
     {% for value in values %}
       <div class="form-group">
@@ -26,9 +26,10 @@
       </div>
     {% endfor %}
     </div>
+  </form>
 
     {% if decision %}
-    <div class="decision offset-by-eight column">
+    <div class="decision offset-by-ten column">
       <h3>DECISION MADE:</h3>
       <p> {{ decision }} it is! </p>
       <br>
@@ -45,7 +46,7 @@
     <!--
     <input type="submit" value="Submit!" />
     -->
-  </form>
+
 
 {% else %}
   <!-- humm... why we need action = url for home here?-->
