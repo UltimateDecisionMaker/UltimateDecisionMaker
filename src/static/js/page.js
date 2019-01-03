@@ -1,12 +1,21 @@
 
 // add row handle
 // to keep track of the input item.
+// var x = {{ values |length }};
+
+// if (typeof x !== "undefined"){
+//     console.log("we have values!");
+//   }
+//   else{
+//     console.log("no values found!");
+//   };
+
 $(document).ready(function(){
     var max_fields = 10; //maximum input boxes allowed
     var wrapper = $(".element-wrapper"); //Fields wrapper
     var add_button = $(".btn-add-row"); //Add button ID
 
-    var x = 1; //initlal text box count
+    // var x = 1; //initlal text box count
 
     // user click on add botton
     // $(document).on("click", ".btn-add-row", function(){
@@ -32,22 +41,22 @@ $(document).ready(function(){
     });
 });
 
-// when decision pressed
-$(function() {
-    $('.decision-button').click(function() {
-        $.ajax({
-            url: '/',
-            data: $(".form-control").serialize(),
-            type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    });
-});
+// when re-submit decision pressed
+// $(function() {
+//     $('.decision-button').click(function() {
+//         $.ajax({
+//             url: '/',
+//             data: $(".form-control").serialize(),
+//             type: 'POST',
+//             success: function(response) {
+//                 console.log(response);
+//             },
+//             error: function(error) {
+//                 console.log(error);
+//             }
+//         });
+//     });
+// });
 
 
 // $(function() {

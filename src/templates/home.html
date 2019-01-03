@@ -27,9 +27,27 @@
       </div>
     {% endfor %}
     </div>
-    <br>
+
+    {% if decision %}
+    <div class="decision">
+      <h3>DECISION MADE:</h3>
+      <p> {{ decision }} it is! </p>
+      <br>
+      <button class="decision-button" type="submit">Re-Select</button>
+      <button class="decision-button" type="submit">Go with it</button>
+      <br>
+      <p> Now we have made a decision for you. Are you glad you end up with<strong> {{ decision }} </strong>?</p>
+      <p> Hit "Go with it" to save your decision!</p>
+      <br>
+      <p> Or, are you secretly hoping you will end up with something else?</p>
+      <p> Modify your options and hit "Re-Select"!</p>
+    </div>
+    {% endif %}
+    <!--
     <input type="submit" value="Submit!" />
+    -->
   </form>
+
 {% else %}
 
   <form class="special-form" action="{{url_for('home')}}" method="post" role="form">
@@ -43,23 +61,106 @@
         </div>
     </div>
     <br>
+    <button class="decision-button" type="submit">Decide for Me!</button>
+    <!--
     <input type="submit" value="Submit!" />
-    <!--<button class="decision-button" type="submit">Decide for Me!</button>-->
+    -->
   </form>
 
 {% endif %}
 
-{% if decision %}
-<div class="decision">
-  <h3>DECISION MADE:</h3>
-  <p> {{ decision }} it is! </p>
-</div>
-{% endif %}
 
 
 {% endblock content%}
 
 {% block scripts %}
 <!--new try for dynamic scripts-->
+
+<script>
+var max_fields = 10; //maximum input boxes allowed
+var content_keys = {{ content_keys | safe }};
+var values = {{ values | safe }};
+
+var x = {{ values |length }};
+//console.log('scott was here', x);
+if (x == 0){
+  x = 1;
+};
+
+//for (i=0; i< {{ keys |length }} ; i++){
+for (i=0; i< content_keys.length ; i++){
+  console.log("i == ", i);
+  console.log("We have keys!:", content_keys[i]);
+};
+
+//generating initial choice_name array
+var choice_names = Array();
+for (i=1; i<max_fields+1; i++){
+  tmp = "choice_" + i
+  if (content_keys.includes(tmp)){
+    console.log(tmp, " already exists, pass.");
+  }
+  else{
+    choice_names.push(tmp);
+    console.log("Created choice name: choice_"+i);
+  };
+};
+
+/*
+if (values){
+  console.log("we have values!");
+}
+else{
+  console.log("no values found!");
+}
+
+
+if (values){
+  var x = {{ values |length }};
+  console.log('scott was here', x);
+}
+else{
+  var x = 1};
+*/
+
+$(document).ready(function(){
+    var wrapper = $(".element-wrapper"); //Fields wrapper
+    var add_button = $(".btn-add-row"); //Add button ID
+
+    // var x = 1; //initlal text box count
+
+    // user click on add botton
+    // $(document).on("click", ".btn-add-row", function(){
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            local_add_name = choice_names.pop();
+            local_remove_name = local_add_name.replace("choice","remove")
+            $(".element-wrapper").append(
+                '<div class="form-group">' +
+                '<input class="form-control" type="text" placeholder="Your Choice" name="' + local_add_name + '"/>' +
+                '<button class="btn-remove-row" name="' + local_remove_name + '"> Remove row </button></div>');
+        }
+    });
+
+    //user click on remove field
+    $(wrapper).on("click",".btn-remove-row", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+        //var index = $(".btn-remove-row").index(this);
+        //console.log("removing row with index = ", index)
+        //console.log("removing row with index = ", this.getAttribute('class'))
+        console.log("removing row with name = ", this.getAttribute('name'));
+        local_add_name = this.getAttribute('name').replace("remove","choice")
+        console.log("adding back the choice name", local_add_name);
+        console.log("choice name list = ", choice_names);
+        choice_names.push(local_add_name);
+    });
+});
+
+
+</script>
+
+
 
 {% endblock scripts %}
