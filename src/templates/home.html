@@ -8,9 +8,6 @@
   and hit the button, and we'll do the hard work for you.</p>
 </div>
 
-
-<!--new try for dynamic templates 1
--->
 <button class="btn-add-row">
   Add new row
 </button>
@@ -49,7 +46,7 @@
   </form>
 
 {% else %}
-
+  <!-- humm... why we need action = url for home here?-->
   <form class="special-form" action="{{url_for('home')}}" method="post" role="form">
     <div class="element-wrapper">
         <!--<div class="row">-->
@@ -69,15 +66,13 @@
 
 {% endif %}
 
-
-
 {% endblock content%}
 
-{% block scripts %}
-<!--new try for dynamic scripts-->
 
+
+{% block scripts %}
 <script>
-var max_fields = 10; //maximum input boxes allowed
+var max_fields = 18; //maximum input boxes allowed
 var content_keys = {{ content_keys | safe }};
 var values = {{ values | safe }};
 
@@ -93,7 +88,7 @@ for (i=0; i< content_keys.length ; i++){
   console.log("We have keys!:", content_keys[i]);
 };
 
-//generating initial choice_name array. this method is needed
+// generating initial choice_name array. this method is needed
 // bcz user may remove any choice_id and we need to make sure
 // no duplicate ones are used.
 var choice_names = Array();
@@ -112,11 +107,6 @@ for (i=1; i<max_fields+1; i++){
 $(document).ready(function(){
     var wrapper = $(".element-wrapper"); //Fields wrapper
     var add_button = $(".btn-add-row"); //Add button ID
-
-    // var x = 1; //initlal text box count
-
-    // user click on add botton
-    // $(document).on("click", ".btn-add-row", function(){
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if (x < max_fields) {
@@ -133,10 +123,6 @@ $(document).ready(function(){
     //user click on remove field
     $(wrapper).on("click",".btn-remove-row", function(e){
         e.preventDefault(); $(this).parent('div').remove(); x--;
-        //var index = $(".btn-remove-row").index(this);
-        //console.log("removing row with index = ", index)
-        //console.log("removing row with index = ", this.getAttribute('class'))
-        console.log("removing row with name = ", this.getAttribute('name'));
         local_add_name = this.getAttribute('name').replace("remove","choice")
         console.log("adding back the choice name", local_add_name);
         console.log("choice name list = ", choice_names);
