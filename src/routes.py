@@ -1,6 +1,5 @@
 from . import app
 from flask import render_template, request, flash, g
-from .forms import ChoiceForm, C_Form, CompanyForm, LocationForm
 from .models import History, db, Decision
 import random
 from sqlalchemy.exc import IntegrityError, DBAPIError
