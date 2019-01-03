@@ -5,6 +5,8 @@ from flask import render_template, request, flash, g
 from .models import History, db, Decision
 from sqlalchemy.exc import IntegrityError, DBAPIError
 from werkzeug.utils import secure_filename
+import os
+from .auth import login_required
 
 
 
@@ -25,7 +27,6 @@ def home():
     # Take the first 2 elements of the now randomized array
     # print arr[0:2]
 
-    # if len(content_keys) > 1:
     if (request.method == 'POST') and (request.form["submit-button"] == "decide-for-me"):
         decision = random.choice(values)
         return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
@@ -60,6 +61,7 @@ def allowed_file(filename):
 
 
 @app.route('/vision', methods=['POST', 'GET'])
+@login_required
 def vision():
     global img_name
     global choices
