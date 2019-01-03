@@ -8,6 +8,30 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
+class Decision(db.Model):
+
+    __tablename__ = 'decisions'
+
+    id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.ForeignKey('accounts.id'), nullable=False)
+    decision = db.Column(db.String(128))
+    date_created = db.Column(db.DateTime, default=dt.now())
+
+    user = db.relationship('Account', backref='decision', lazy=True)
+
+
+class History(db.Model):
+
+    __tablename__ = 'histories'
+
+    id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.ForeignKey('accounts.id'), nullable=False)
+    options = db.Column(db.String(128))
+    date_created = db.Column(db.DateTime, default=dt.now())
+
+    user = db.relationship('Account', backref='history', lazy=True)
+
+
 class Account(db.Model):
     __tablename__ = 'accounts'
 
@@ -15,7 +39,11 @@ class Account(db.Model):
     email = db.Column(db.String(256), index=True, nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)
 
+    histories = db.relationship('History', backref='account', lazy=True)
+
     date_created = db.Column(db.DateTime, default=dt.now())
+
+
 
     def __repr__(self):
         return '<Account {}>'.format(self.email)

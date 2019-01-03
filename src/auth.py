@@ -67,6 +67,15 @@ def register():
 
     return render_template('auth/register.html', form=form, error=error)
 
+@app.before_request
+def load_logged_in_account():
+    account_id = session.get('account_id')
+
+    if account_id is None:
+        g.user = None
+    else:
+        g.user = Account.query.get(account_id)
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
