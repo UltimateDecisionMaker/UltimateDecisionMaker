@@ -4,7 +4,7 @@ In this file, we define all the inputs we gonna get and format them via FlaskFor
 
 # from flask import session
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, FormField, FieldList, TextField
+from wtforms import StringField, PasswordField  # FormField, FieldList, TextField
 from wtforms.validators import DataRequired
 
 
