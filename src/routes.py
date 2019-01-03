@@ -7,22 +7,21 @@ from sqlalchemy.exc import IntegrityError, DBAPIError
 
 
 @app.route('/', methods=['POST', 'GET'])
+# @app.cache.cached(timeout=300)  # cache this view for 5 minutes
 def home():
     """
     """
+    # grab data from user inputs in dynamic forms
     data = request.form
-    keys = list(data.keys())
+    content_keys = list(data.keys())
     values = list(data.values())
-
-    old_form = ChoiceForm()
-    form = CompanyForm()
-    # import pdb; pdb.set_trace()
 
     # notice, to randomly select n out of m items:
     # random.shuffle(arr)
     # Take the first 2 elements of the now randomized array
     # print arr[0:2]
-    if len(keys) > 1:
+    
+    if len(content_keys) > 1:
         decision = random.choice(values)
         if g.user:
             options = ', '.join(values)
@@ -42,9 +41,11 @@ def home():
 
             except (DBAPIError, IntegrityError):
                 flash('Something went wrong.')
-                return render_template('home.html', form=form, old_form=old_form)
+                return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
+#                 return render_template('home.html', form=form, old_form=old_form)
+        return render_template('home.html', decision=decision, values=values, content_keys=content_keys)
+#         return render_template('home.html', decision=decision, form=form, old_form=old_form)
 
-        return render_template('home.html', decision=decision, form=form, old_form=old_form)
 
     # if old_form.validate_on_submit():
     #     choice1 = old_form.data['choice1']
@@ -54,7 +55,9 @@ def home():
 
     # return render_template("edit.html", form=form)
 
-    return render_template('home.html', form=form, old_form=old_form)
+
+#     return render_template('home.html', form=form, old_form=old_form)
+    return render_template('home.html', values=values, content_keys=content_keys)
     # return render_template('home.html')
 
 

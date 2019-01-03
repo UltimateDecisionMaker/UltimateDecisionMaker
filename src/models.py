@@ -58,5 +58,3 @@ class Account(db.Model):
             if sha256_crypt.verify(password, account.password):
                 return True
         return False
-
-

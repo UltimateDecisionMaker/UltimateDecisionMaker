@@ -49,6 +49,7 @@ SQLAlchemy = "==1.2.15"
 Werkzeug = "==0.14.1"
 WTForms = "==2.2.1"
 python-dotenv = "*"
+flask-caching = "*"
 
 [requires]
 python_version = "3.6"
