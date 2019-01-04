@@ -55,3 +55,20 @@ ul {
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#fff));
 }
 
+.decision {
+    float: right;
+    width: 65%;
+}
+
+.special-form {
+    width: 35%;
+    margin-right: 0;
+}
+
+form {
+    display: inline-block;
+}
+
+.decision-button, .btn-add-row {
+    width: 170px;
+}

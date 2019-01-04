@@ -1,0 +1,8 @@
+<div class="decision">
+    <h3>DECISION MADE:</h3>
+    <h5> {{ decision }} it is! </h5>
+    {% if g.user %}
+    <p> Are you happy with <strong>{{ decision}}</strong>? If so, hit the "go with it" button to save your decision!</p>
+    {% endif %}
+    <p> Were you secretly hoping for a different result? Modify your options and mash "re-select"!</p>
+</div>
