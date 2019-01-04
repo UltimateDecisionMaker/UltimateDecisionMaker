@@ -1,8 +1,12 @@
 """Tests for the Ultimate Decision Maker."""
 
-
 def test_post_from_home_route(app):
     """Test posting from the home route without redirection."""
+    app.test_client().post('/', data={
+        "submit-button": 'decide-for-me',
+        "choice_1": 'burger',
+        "choice_2": 'pizza',
+    })
     app.test_client().post(
         '/',
         data={'submit-button': 'decide-for-me',
@@ -20,23 +24,20 @@ def test_home_route_get(app):
 
 def test_home_input(app):
     """Test posting to the home route with redirects."""
-    rv = app.test_client().post(
-        '/',
-        data={'submit-button':
-              'decide-for-me',
-              'choice_1': 'burger',
-              'choice_2': 'pizza'},
-        follow_redirects=True
-    )
+    rv = app.test_client().post('/', data={
+        'submit-button': 'decide-for-me',
+        'choice_1': 'burger',
+        'choice_2': 'pizza'},
+        follow_redirects=True)
 
     assert b"DECISION MADE:" in rv.data
     assert (b'burger' in rv.data) or (b'pizza' in rv.data)
+
 
 def test_bad_route(app):
     """Test an invalid route."""
     rv = app.test_client().get('/foo')
     assert rv.status_code == 404
-
 
 
 class TestAuthentication:
@@ -53,7 +54,7 @@ class TestAuthentication:
 
     def test_registration_no_same_email(self, client):
         """Test that registration fails if the account already exists."""
-        tmp = client.post(
+        client.post(
             '/register',
             data={'email': 'test@example.com', 'password': 'seekret'},
             follow_redirects=True,
@@ -100,10 +101,26 @@ class TestAuthentication:
 
     def test_registered_user_vision_route(self, authenticated_client):
         """Test the vision route for a logged in user."""
-        res = authenticated_client.get('/vision')
-        assert res.status_code == 200
+        rv = authenticated_client.get('/vision')
+        assert rv.status_code == 200
+        assert b'<h1>Upload new File</h1>' in rv.data
 
     def test_unauthenticated_user_authenticated_route(self, app):
         """Test the vision route if the user is not logged in."""
         res = app.test_client().get('/vision', follow_redirects=True)
         assert b'Please login first.' in res.data
+
+    def test_user_history_route(self, authenticated_client):
+        authenticated_client.post('/', data={
+            'choice_1': 'burger',
+            'choice_2': 'pizza',
+            'submit-button': 'decide-for-me'})
+
+        authenticated_client.post('/', data={
+            'choice_1': 'burger',
+            'choice_2': 'pizza',
+            'submit-button': 'go-with-it'})
+
+        rv = authenticated_client.get('/history')
+        assert (b'you considered burger, pizza. Ultimately, you chose pizza' in rv.data) or \
+            (b'you considered burger, pizza. Ultimately, you chose burger' in rv.data)
