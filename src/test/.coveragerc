@@ -1,2 +1,3 @@
 [run]
 omit=/Users/rpruazol/.local/share/virtualenvs/UltimateDecisionMaker-UNdHuv2Y/lib/python3.6/site-packages/*
+omit=/home/circleci/repo/venv/lib/python3.6/site-packages/*
