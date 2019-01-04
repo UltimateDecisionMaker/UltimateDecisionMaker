@@ -65,6 +65,7 @@ jobs:
           name: run coverage
           command: |
             . venv/bin/activate
+            cd src/test
             coverage run -m pytest
             coverage report
 
