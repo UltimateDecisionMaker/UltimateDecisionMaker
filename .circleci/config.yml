@@ -61,6 +61,20 @@ jobs:
             . venv/bin/activate
             pytest -v
 
+      - run:
+          name: run coverage
+          command: |
+            . venv/bin/activate
+            cd src/test
+            coverage run -m pytest
+
+      - run:
+          name: run coverage report
+          command: |
+            . venv/bin/activate
+            cd src/test
+            coverage report
+
       - store_artifacts:
           path: test-reports
           destination: test-reports
