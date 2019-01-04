@@ -23,28 +23,25 @@
         <button class="btn-remove-row" name={{"remove_" + (values.index(value)+1)|string}} >
           Remove row
         </button>
-      </div>
+        </div>
     {% endfor %}
+      </div>
     </div>
 
+      {% if decision %}
+      <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Re-Select</button>
+      {% if g.user %}
+      <button class="decision-button" type="submit" name="submit-button" value="go-with-it">Go with it</button>
+      {% endif %}
+      {% endif %}
+  </form>
+
     {% if decision %}
-    <div class="decision">
-      <h3>DECISION MADE:</h3>
-      <p> {{ decision }} it is! </p>
-      <br>
-      <p> Now we have made a decision for you. Are you glad you end up with<strong> {{ decision }} </strong>?</p>
-      <p> Hit "Go with it" to save your decision!</p>
-      <button class="decision-button" type="submit" name="submit-button" value="decide-for-me" >Re-Select</button>
-      <br>
-      <p> Or, are you secretly hoping you will end up with something else?</p>
-      <p> Modify your options and hit "Re-Select"!</p>
-      <button class="decision-button" type="submit" name="submit-button" value="go-with-it" >Go with it</button>
-    </div>
+    {% include "decision.html" %}
     {% endif %}
     <!--
     <input type="submit" value="Submit!" />
     -->
-  </form>
 
 
 {% else %}

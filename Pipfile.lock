@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c42efab7f1156704cbfe9431ca461f6e16fbbcf4a642a3d8a03cf5781e7135df"
+            "sha256": "bfef935ce939f8286149aeaccc373cd239524dfc00da1b29b93288b6fa9e23c2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -51,6 +51,7 @@
                 "sha256:0a258d82933a1dd18cb540aca4ac5d5690731e24d1239a08577b814998f49785",
                 "sha256:4621965b0d9d4c82a79a29edbad19946f5e7702df4afae7d1ed2df951559a8cc"
             ],
+            "index": "pypi",
             "version": "==3.0.0"
         },
         "certifi": {
@@ -162,6 +163,7 @@
                 "sha256:85693e163a1a6faea69a74f8feaf35d54dfa2559fbdbbe389c93ffb3bb4c9a79",
                 "sha256:eea2d223f7bdc6d68dd1c4681e17cded5a00b5a8e686e1597b89f27f58cf2980"
             ],
+            "index": "pypi",
             "version": "==1.7.0"
         },
         "google-auth": {
@@ -169,6 +171,7 @@
                 "sha256:b6081ba9946828d6417c15ecdc723fdb7c007cdd74e140747d3876a7440f0be5",
                 "sha256:e8d64e9bc8cb6f0fc5360c693f86dc9ee6964081ee702e3b5ddc937f99efc950"
             ],
+            "index": "pypi",
             "version": "==1.6.2"
         },
         "google-cloud-vision": {
@@ -183,6 +186,7 @@
             "hashes": [
                 "sha256:0946967c4c29b1339bb211949e1e17dbe0ae9ff8265fafa7bf4cf2164ef5a3b1"
             ],
+            "index": "pypi",
             "version": "==1.5.5"
         },
         "grpcio": {
@@ -220,6 +224,7 @@
                 "sha256:fa6e14bce7ad5de2363abb644191489ddfffcdb2751337251f7ef962ab7e3293",
                 "sha256:fd6774bbb6c717f725b39394757445ead4f69c471118364933aadb81a4f16961"
             ],
+            "index": "pypi",
             "version": "==1.17.1"
         },
         "idna": {
@@ -434,6 +439,7 @@
                 "sha256:ceec283da2323e2431c49de58f80e1718986b79be59c266bb0509cbf90ca5b9e",
                 "sha256:fcfc907746ec22716f05ea96b7f41597dfe1a1c088f861efb8a0d4f4196a6f10"
             ],
+            "index": "pypi",
             "version": "==3.6.1"
         },
         "psycopg2": {
@@ -485,6 +491,7 @@
                 "sha256:da2420fe13a9452d8ae97a0e478adde1dee153b11ba832a95b223a2ba01c10f7",
                 "sha256:da6b43a8c9ae93bc80e2739efb38cc776ba74a886e3e9318d65fe81a8b8a2c6e"
             ],
+            "index": "pypi",
             "version": "==0.4.5"
         },
         "pyasn1-modules": {
@@ -492,6 +499,7 @@
                 "sha256:642afdabb681d39f5948fd5477764d94faf17ce40e5691e9998b52815fbb4e71",
                 "sha256:d14fcb29dabecba3d7b360bf72327c26c385248a5d603cf6be5f566ce999b261"
             ],
+            "index": "pypi",
             "version": "==0.2.3"
         },
         "pyparsing": {
@@ -571,6 +579,7 @@
                 "sha256:14ba45700ff1ec9eeb206a2ce76b32814958a98e372006c8fb76ba820211be66",
                 "sha256:1a836406405730121ae9823e19c6e806c62bbad73f890574fff50efa4122c487"
             ],
+            "index": "pypi",
             "version": "==4.0"
         },
         "six": {

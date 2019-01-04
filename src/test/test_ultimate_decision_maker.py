@@ -1,6 +1,5 @@
 """Tests for the Ultimate Decision Maker."""
 
-
 def test_post_from_home_route(app):
     """Test posting from the home route without redirection."""
     app.test_client().post('/', data={
@@ -8,6 +7,12 @@ def test_post_from_home_route(app):
         "choice_1": 'burger',
         "choice_2": 'pizza',
     })
+    app.test_client().post(
+        '/',
+        data={'submit-button': 'decide-for-me',
+              'choice_1': 'burger',
+              'choice_2': 'pizza'}
+    )
 
 
 def test_home_route_get(app):
