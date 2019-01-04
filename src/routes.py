@@ -102,6 +102,7 @@ def vision():
 
     # when user hit decide for me, or re-select.
     if (request.method == 'POST') and (request.form["submit-button"] == "decide-for-me"):
+        import pdb; pdb.set_trace()
         data = request.form
         choices = list(data.values())[:-1]
         decision = random.choice(choices)
