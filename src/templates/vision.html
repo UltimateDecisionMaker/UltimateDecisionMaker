@@ -7,10 +7,8 @@
     <p>here's the picture</p>
     <p><img src="{{ url_for('static',filename='assets/' + img_name)}}"></p>
 
-    <button class="btn-add-row">
-      Add new row
-    </button>
-    <form class="special-form one-half column" method="post" role="form"> <!--removed action=.home-->
+
+    <form class="special-form" method="post" role="form"> <!--removed action=.home-->
       <div class="element-wrapper">
       {% for c in range(choices | length) %}
         <div class="form-group">
@@ -23,6 +21,13 @@
     </div>
     <br>
     <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Decide for Me!</button>
+    <button class="btn-add-row">Add new row</button>
+    <br>
+    {% if decision %}
+    <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Re-Select</button>
+    <button class="decision-button" type="submit" name="submit-button" value="go-with-it">Go with it</button>
+    {% endif %}
+    </form>
 
   {% else %}
   <!--if new get request-->
@@ -31,27 +36,19 @@
       <form method="post" enctype="multipart/form-data">
         <p><input type="file" name="file">
           <input type="submit" name="submit-button" value="Upload">
-      </form>
+
 
   {% endif %}
 
   {% if decision %}
-  <div class="decision one-half column">
-    <h3>DECISION MADE:</h3>
-    <p> {{ decision }} it is! </p>
-    <br>
-    <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Re-Select</button>
-    <button class="decision-button" type="submit" name="submit-button" value="go-with-it">Go with it</button>
-    <br>
-    <p> Now we have made a decision for you. Are you glad you end up with<strong> {{ decision }} </strong>?</p>
-    <p> Hit "Go with it" to save your decision!</p>
-    <br>
-    <p> Or, are you secretly hoping you will end up with something else?</p>
-    <p> Modify your options and hit "Re-Select"!</p>
-  </div>
+  {% include "decision.html" %}
   {% endif %}
 
 {% endblock content %}
+
+
+
+
 
 {% block scripts %}
 <script>

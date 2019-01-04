@@ -15,7 +15,7 @@
 
 
 {% if values %}
-  <form class="special-form one-half column" action="{{url_for('home')}}" method="post" role="form">
+  <form class="special-form" action="{{url_for('home')}}" method="post" role="form">
     <div class="element-wrapper">
     {% for value in values %}
       <div class="form-group">
@@ -23,29 +23,26 @@
         <button class="btn-remove-row" name={{"remove_" + (values.index(value)+1)|string}} >
           Remove row
         </button>
-      </div>
+        </div>
     {% endfor %}
+      </div>
     </div>
 
-    {% if decision %}
-    <div class="decision offset-by-eight column">
-      <h3>DECISION MADE:</h3>
-      <p> {{ decision }} it is! </p>
-      <br>
+      {% if decision %}
       <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Re-Select</button>
+      {% if g.user %}
       <button class="decision-button" type="submit" name="submit-button" value="go-with-it">Go with it</button>
-      <br>
-      <p> Now we have made a decision for you. Are you glad you end up with<strong> {{ decision }} </strong>?</p>
-      <p> Hit "Go with it" to save your decision!</p>
-      <br>
-      <p> Or, are you secretly hoping you will end up with something else?</p>
-      <p> Modify your options and hit "Re-Select"!</p>
-    </div>
+      {% endif %}
+      {% endif %}
+  </form>
+
+    {% if decision %}
+    {% include "decision.html" %}
     {% endif %}
     <!--
     <input type="submit" value="Submit!" />
     -->
-  </form>
+
 
 {% else %}
   <!-- humm... why we need action = url for home here?-->
