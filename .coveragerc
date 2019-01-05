@@ -1,0 +1,3 @@
+[run]
+source = UltimateDecionMaker
+omit = src/test/*

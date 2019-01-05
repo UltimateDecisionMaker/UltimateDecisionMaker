@@ -1,21 +1,137 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-  <h1>Welcome to Ultimate Decision Maker.</h1>
-  <p>This is a place where you can tell us what your choices are,</p>
-  <p>And we will find the best one for you.</p>
-  <p>...</p>
-  <p>No more pondering, Life can be this easy!</p>
+<div>
+  <h2>Let's make some decisions!</h2>
+  <p>Not sure what to order for dinner? Trying to choose between similar brands?
+  Use our decision-making engine to decide for you! Simply input your choices below
+  and hit the button, and we'll do the hard work for you.</p>
+
+  <button class="btn-add-row">
+    Add new row
+  </button>
+
 </div>
 
-<div class="input">
-  <h3>Now, tell us your choices</h3>
-  <form action="{{url_for('handle_choice')}}" method="post">
-    <input type="text" name="projectFilePath">
-    <input type="text" name="projectFilePath">
-    <input type="submit">
+
+{% if values %}
+  <form class="special-form" action="{{url_for('home')}}" method="post" role="form">
+    <div class="element-wrapper">
+    {% for value in values %}
+      <div class="form-group">
+        <input class="form-control" type="text" value={{ value }} name={{"choice_" + (values.index(value)+1)|string}} />
+        <button class="btn-remove-row" name={{"remove_" + (values.index(value)+1)|string}} >
+          Remove row
+        </button>
+        </div>
+    {% endfor %}
+      </div>
+    </div>
+
+      {% if decision %}
+      <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Re-Select</button>
+      {% if g.user %}
+      <button class="decision-button" type="submit" name="submit-button" value="go-with-it">Go with it</button>
+      {% endif %}
+      {% endif %}
   </form>
-</div>
+
+    {% if decision %}
+    {% include "decision.html" %}
+    {% endif %}
+    <!--
+    <input type="submit" value="Submit!" />
+    -->
+
+
+{% else %}
+  <!-- humm... why we need action = url for home here?-->
+  <form class="special-form" action="{{url_for('home')}}" method="post" role="form">
+    <div class="element-wrapper">
+        <!--<div class="row">-->
+        <div class="form-group">
+          <input class="form-control" type="text" placeholder="Your Choice" name="choice_1"/>
+          <button class="btn-remove-row" name="remove_1">
+            Remove row
+          </button>
+        </div>
+    </div>
+    <br>
+    <button class="decision-button" type="submit" name="submit-button" value="decide-for-me">Decide for Me!</button>
+    <!--
+    <input type="submit" value="Submit!" />
+    -->
+  </form>
+
+{% endif %}
 
 {% endblock content%}
+
+
+
+{% block scripts %}
+<script>
+var max_fields = 18; //maximum input boxes allowed
+var content_keys = {{ content_keys | safe }};
+var values = {{ values | safe }};
+
+var x = {{ values |length }};
+//console.log('scott was here', x);
+if (x == 0){
+  x = 1;
+};
+
+// check grabbing keys
+for (i=0; i< content_keys.length ; i++){
+  console.log("i == ", i);
+  console.log("We have keys!:", content_keys[i]);
+};
+
+// generating initial choice_name array. this method is needed
+// bcz user may remove any choice_id and we need to make sure
+// no duplicate ones are used.
+var choice_names = Array();
+for (i=1; i<max_fields+1; i++){
+  tmp = "choice_" + i
+  if (content_keys.includes(tmp)){
+    console.log(tmp, " already exists, pass.");
+  }
+  else{
+    choice_names.push(tmp);
+    console.log("Created choice name: choice_"+i);
+  };
+};
+
+
+$(document).ready(function(){
+    var wrapper = $(".element-wrapper"); //Fields wrapper
+    var add_button = $(".btn-add-row"); //Add button ID
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            local_add_name = choice_names.pop();
+            local_remove_name = local_add_name.replace("choice","remove")
+            $(".element-wrapper").append(
+                '<div class="form-group">' +
+                '<input class="form-control" type="text" placeholder="Your Choice" name="' + local_add_name + '"/>' +
+                '<button class="btn-remove-row" name="' + local_remove_name + '"> Remove row </button></div>');
+        }
+    });
+
+    //user click on remove field
+    $(wrapper).on("click",".btn-remove-row", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+        local_add_name = this.getAttribute('name').replace("remove","choice")
+        console.log("adding back the choice name", local_add_name);
+        console.log("choice name list = ", choice_names);
+        choice_names.push(local_add_name);
+    });
+});
+
+
+</script>
+
+
+
+{% endblock scripts %}

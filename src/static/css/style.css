@@ -1,61 +1,74 @@
-header {
-  border-bottom: 0.05vh solid slategray;
-  box-shadow: 0 4px 2px -2px slategray;
-  background-color: #4CAF50;
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin|Work+Sans');
+
+body {
+    padding: 20px;
+    font-family: "Work Sans";
+    /* background-color: blueviolet */
 }
 
-li a:hover:not(.active) {
-    background-color: #111;
-    /* display: block; */
-  }
-
-.active {
-background-color: #4CAF50;
+.main_nav {
+    text-align: center;
 }
 
 .main_nav a {
-    display: inline-block;
-    padding: 8px;
-    color: aliceblue;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    margin: 0px 10px;
+
 }
 
 .main_nav li {
-
     display: inline-block;
-    padding: 24px;
-
+    margin: 1rem 0rem;
 }
 
-.main_nav li:after {
-    content: ' |';
+.main_nav a:hover {
+    color: lightgray;
+    cursor: pointer;
 }
 
-.main_nav ul {
-    background-color: #111;
-}
-.main_nav ul:before {
-    content: url('../assets/dino.png');
-}
-
-.company_labels {
-  font-weight: bold;
-}
-
-a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    text-decoration: none;
-    color: initial;
+.title {
+    font-family: "Libre Franklin";
+    background-image: linear-gradient(to right, black , gray);
+    color: white;
+    padding: 0px 10px;
+    margin: 0 auto;
+    /* width: 80%; */
+    text-align: center;
 }
 
+ul {
+    background-image: linear-gradient(to right, black , gray);
+    display: inline;
+    padding: 5px 0px;
+    text-align: center;
+}
 
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid rgb(15, 8, 8);
-    margin: 1em 0;
-    padding: 0;
+.sexy_line{
+    /* Borrowed from CSS Tricks forums. Name left alone for posterity.*/
+    display:block;
+    border:none;
+    color:white;
+    height:1px;
+    background:black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#000), to(#fff));
+}
+
+.decision {
+    float: right;
+    width: 65%;
+}
+
+.special-form {
+    width: 35%;
+    margin-right: 0;
+}
+
+form {
+    display: inline-block;
+}
+
+.decision-button, .btn-add-row {
+    width: 170px;
 }
