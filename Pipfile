@@ -58,7 +58,7 @@ grpcio = "==1.17.1"
 protobuf = "==3.6.1"
 pyasn1 = "==0.4.5"
 pyasn1-modules = "==0.2.3"
-rsa = "==4.0"
+rsa = "==4.1"
 Flask-Caching = "==1.4.0"
 
 [requires]
